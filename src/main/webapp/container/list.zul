@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zk>
+<zk>
+  <window apply="${containerListComposer}" border="normal">
+    <groupbox mold="3d" closable="false">
+      <caption label="Search" />
+      <label value="Status: " />
+      <combobox id="stateCombobox" />
+      <space width="30px" />
+      <label value="Name: " />
+      <textbox id="nameTextbox" />
+      <space width="30px" />
+      <label value="ID: " />
+      <textbox id="idTextbox" />
+      <space width="30px" />
+      <label value="Image-Name: " />
+      <textbox id="imageNameTextbox" />
+      <space width="30px" />
+      <button id="searchSubmitButton" label="Search" />
+      <space width="3px" />
+      <button id="searchResetButton" label="Reset" />
+    </groupbox>
+    <separator />
+    <listbox id="containerListbox" mold="paging" pageSize="20" sizedByContent="true" span="true">
+      <listhead sizable="true" menupopup="auto">
+        <listheader label="ID" sort="auto(id)" />
+        <listheader label="State" sort="auto(state)" />
+        <listheader label="Name" sort="auto(name)" />
+        <listheader label="Image" sort="auto(image)" />
+        <listheader label="Created" sort="auto(created)" />
+      </listhead>
+    </listbox>
+  </window>
+</zk>

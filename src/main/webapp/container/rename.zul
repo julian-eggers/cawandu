@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zk>
+<zk>
+  <window apply="${containerRenameComposer}" mode="modal" closable="true" border="normal" width="270px">
+    <textbox id="nameTextbox" style="margin-right: 10px;" />
+    <button id="renameButton" label="Rename" />
+  </window>
+</zk>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title="${labels.error.title}"?>
+<!DOCTYPE zk>
+<window mode="modal" border="normal" title="${labels.error.title}" width="400px">
+	<grid>
+		<rows>
+			<row>${labels.error.message}</row>
+			<row align="right">
+				<button label="${labels.error.goOn}" forward="warningWindow.onClose" />
+			</row>
+		</rows>
+	</grid>
+</window>

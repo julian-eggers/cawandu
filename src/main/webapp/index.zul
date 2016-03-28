@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zk>
+<zk>
+<?component name="menu" macroURI="/inc/menubar.zul"?>
+<?page title="${labels.app.title}"?>
+	<window title="${labels.app.title}" id="mainWindow" border="none" shadow="false">
+		<menu width="100%" />
+	</window>
+</zk>
