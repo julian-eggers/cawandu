@@ -50,6 +50,11 @@ public class ContainerRenameComposer extends PopupComposer
             throw new WrongValueException(nameTextbox, "Choose another name!");
         }
         
+        if (!name.matches(Container.CONTAINER_NAME_PATTERN))
+        {
+            throw new WrongValueException(nameTextbox, "Invalid name!");
+        }
+        
         Container existingContainer = containerService.getContainerByName(name);
         
         if (existingContainer != null && !existingContainer.getId().equals(container.getId()))

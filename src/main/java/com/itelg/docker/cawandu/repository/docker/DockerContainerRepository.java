@@ -28,7 +28,7 @@ public class DockerContainerRepository implements ContainerRepository
     
     @Autowired
     private ContainerConverter containerConverter;
-
+    
     @Override
     public void renameContainer(Container container, String newName)
     {

@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class Container
 {
+    public static final String CONTAINER_NAME_PATTERN = "/?[a-zA-Z0-9_-]+";
+    
     private String id;
     private ContainerState state;
     private String name;
