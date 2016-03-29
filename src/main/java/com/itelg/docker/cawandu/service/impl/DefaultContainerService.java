@@ -11,6 +11,7 @@ import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
 import com.itelg.docker.cawandu.repository.ContainerRepository;
 import com.itelg.docker.cawandu.service.ContainerService;
+import com.itelg.docker.cawandu.service.ImageService;
 
 @Service
 public class DefaultContainerService implements ContainerService
@@ -19,6 +20,9 @@ public class DefaultContainerService implements ContainerService
     
     @Autowired
     private ContainerRepository containerRepository;
+    
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public void renameContainer(Container container, String newName)
@@ -30,6 +34,7 @@ public class DefaultContainerService implements ContainerService
     @Override
     public void recreateContainer(Container container)
     {
+        imageService.pullImage(container.getImageName());
         containerRepository.recreateContainer(container);
         log.info("Container recreated (" + container + ")");
     }

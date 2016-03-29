@@ -31,10 +31,16 @@ public class DockerImageRepository implements ImageRepository
     @Override
     public UpdateState pullImage(Image image)
     {
+        return pullImage(image.getName());
+    }
+    
+    @Override
+    public UpdateState pullImage(String imageName)
+    {
         try
         {
             UpdateCheckProgressHandler progressHandler = new UpdateCheckProgressHandler();
-            dockerClient.pull(image.getName(), progressHandler);
+            dockerClient.pull(imageName, progressHandler);
             return progressHandler.getState();
         }
         catch (Exception e)

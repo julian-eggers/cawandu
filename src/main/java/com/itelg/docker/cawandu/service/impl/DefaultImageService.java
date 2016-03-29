@@ -36,6 +36,14 @@ public class DefaultImageService implements ImageService
     }
     
     @Override
+    public UpdateState pullImage(String imageName)
+    {
+        UpdateState state = imageRepository.pullImage(imageName);
+        log.info("Image pulled - " + state + " - (" + imageName + ")");
+        return state;
+    }
+    
+    @Override
     public boolean removeImage(Image image)
     {
         boolean successful = imageRepository.removeImage(image);
