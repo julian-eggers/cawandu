@@ -187,9 +187,10 @@
             <HOST_URI></HOST_URI>
             <HOST_CERTIFICATES></HOST_CERTIFICATES>
             <HTTP_PORT>7777</HTTP_PORT>
+            <PULL_MODE>RUNNING</PULL_MODE>
             <JAVA_OPTS>-Dfoo=bar</JAVA_OPTS>
           </env>
-          <cmd>["/bin/sh", "-c", "java -Ddocker.registry.username=${REGISTRY_USERNAME} -Ddocker.registry.email=${REGISTRY_EMAIL} -Ddocker.registry.password=${REGISTRY_PASSWORD} -Ddocker.host.uri=${HOST_URI} -Ddocker.host.certificates.directory=${HOST_CERTIFICATES} -Dserver.port=${HTTP_PORT} -Dfile.encoding=UTF-8 ${JAVA_OPTS} -jar /${project.build.finalName}.${project.packaging}"]</cmd>
+          <cmd>["/bin/sh", "-c", "java -Ddocker.registry.username=${REGISTRY_USERNAME} -Ddocker.registry.email=${REGISTRY_EMAIL} -Ddocker.registry.password=${REGISTRY_PASSWORD} -Ddocker.host.uri=${HOST_URI} -Ddocker.host.certificates.directory=${HOST_CERTIFICATES} -Ddocker.pullMode=${PULL_MODE} -Dserver.port=${HTTP_PORT} -Dfile.encoding=UTF-8 ${JAVA_OPTS} -jar /${project.build.finalName}.${project.packaging}"]</cmd>
           <resources>
             <resource>
               <targetPath>/</targetPath>

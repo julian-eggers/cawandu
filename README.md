@@ -38,3 +38,13 @@ docker run \
 -e REGISTRY_PASSWORD="123456" \
 jeggers/cawandu:latest
 ```
+
+### Properties
+| Environment variable  | Required | Default | Example |
+| ------------- | ------------- | ------------- | ------------- |
+| HOST_URI  | no  |  | https://192.168.0.55:2376 |
+| HOST_CERTIFICATES  | no  |  | /home/avidesit/.docker/machine/certs |
+| REGISTRY_USERNAME  | no  |  | avides |
+| REGISTRY_EMAIL  | no  |  | info@avides.com  |
+| REGISTRY_PASSWORD  | no  |  | 123456  |
+| PULL_MODE | no | RUNNING | (ALL|RUNNING|NONE) |
