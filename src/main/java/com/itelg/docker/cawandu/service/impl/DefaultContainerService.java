@@ -40,6 +40,13 @@ public class DefaultContainerService implements ContainerService
     }
     
     @Override
+    public void switchTag(Container container, String tag)
+    {
+        container.setImageName(container.getImageNameWithoutTag() + ":" + tag);
+        recreateContainer(container);
+    }
+    
+    @Override
     public void startContainer(Container container)
     {
         containerRepository.startContainer(container);

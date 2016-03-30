@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE zk>
+<zk>
+  <window apply="${containerSwitchTagComposer}" mode="modal" closable="true" border="normal" width="300px">
+    <combobox id="tagsCombobox" style="margin-right: 10px;" />
+    <button id="switchTagButton" label="Switch tag" />
+  </window>
+</zk>

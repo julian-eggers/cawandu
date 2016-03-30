@@ -4,7 +4,7 @@
   <window apply="${containerListComposer}" border="normal">
     <groupbox mold="3d" closable="false">
       <caption label="Search" />
-      <label value="Status: " />
+      <label value="State: " />
       <combobox id="stateCombobox" />
       <space width="30px" />
       <label value="Name: " />

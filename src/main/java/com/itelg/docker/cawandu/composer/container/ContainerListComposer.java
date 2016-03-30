@@ -59,7 +59,7 @@ public class ContainerListComposer extends TabComposer
     
     private void initFilter()
     {
-        ComboboxHelper.setDefaultItem(stateCombobox, "Alle anzeigen");
+        ComboboxHelper.setDefaultItem(stateCombobox, "Show all");
         ComboboxHelper.init(stateCombobox, ContainerState.values(), filter.getState(), (ComboitemRenderer<ContainerState>) (item, status, index) ->
         {
             item.setValue(status);
@@ -186,6 +186,21 @@ public class ContainerListComposer extends TabComposer
                 containerService.recreateContainer(container);
                 refreshListbox();
                 showNotification("Container updated");
+            });
+            
+            Menuitem switchTagMenuitem = new Menuitem("Switch tag");
+            switchTagMenuitem.setParent(popup);
+            switchTagMenuitem.addEventListener(Events.ON_CLICK, event ->
+            {
+                org.zkoss.zk.ui.Component composer = ContainerSwitchTagComposer.show(container);
+                composer.addEventListener(Events.ON_CLOSE, closeEvent ->
+                {
+                    if (closeEvent.getData() != null)
+                    {
+                        refreshListbox();
+                        showNotification("Tag swiched");                        
+                    }
+                });
             });
             
             Menuitem recreateContainerMenuitem = new Menuitem("Recreate container");

@@ -1,4 +1,4 @@
-package com.itelg.docker.cawandu.repository.docker;
+package com.itelg.docker.cawandu.repository.dockerclient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.itelg.docker.cawandu.domain.image.Image;
 import com.itelg.docker.cawandu.domain.image.ImageFilter;
 import com.itelg.docker.cawandu.domain.image.UpdateState;
 import com.itelg.docker.cawandu.repository.ImageRepository;
-import com.itelg.docker.cawandu.repository.docker.converter.ImageConverter;
+import com.itelg.docker.cawandu.repository.dockerclient.converter.ImageConverter;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerClient.ListImagesFilterParam;
 

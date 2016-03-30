@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.1.0-RELEASE</version>
+  <version>0.2.0-RELEASE</version>
 
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>
@@ -48,7 +48,7 @@
   </licenses>
 
   <build>
-    <finalName>cawandu</finalName>
+    <finalName>${project.artifactId}</finalName>
     <resources>
       <resource>
         <directory>src/main/resources/</directory>
@@ -322,6 +322,15 @@
       <groupId>com.spotify</groupId>
       <artifactId>docker-client</artifactId>
       <version>3.6.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.3</version>
     </dependency>
   </dependencies>
 </project>

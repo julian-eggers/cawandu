@@ -9,6 +9,7 @@ public interface ContainerService
 {
     void renameContainer(Container container, String newName);
     void recreateContainer(Container container);
+    void switchTag(Container container, String tag);
     
     void startContainer(Container container);
     void stopContainer(Container container);

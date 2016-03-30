@@ -2,7 +2,7 @@ package com.itelg.docker.cawandu.domain.container;
 
 public enum ContainerState
 {
-    UP, EXITED, CREATED;
+    UP, EXITED, CREATED, RESTARTING;
 
     public static ContainerState fromString(String value)
     {
@@ -17,6 +17,10 @@ public enum ContainerState
         else if (value.equals("Created")) 
         {
             return ContainerState.CREATED;
+        }
+        else if (value.startsWith("Restarting")) 
+        {
+            return ContainerState.RESTARTING;
         }
 
         throw new RuntimeException("Unknown state (" + value + ")");

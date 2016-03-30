@@ -3,6 +3,8 @@ package com.itelg.docker.cawandu.domain.container;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Container
 {
     public static final String CONTAINER_NAME_PATTERN = "/?[a-zA-Z0-9_-]+";
@@ -58,6 +60,31 @@ public class Container
     public void setImageName(String imageName)
     {
         this.imageName = imageName;
+    }
+    
+    public String getImageTag()
+    {
+        if (StringUtils.isNotBlank(imageName))
+        {
+            if (imageName.contains(":"))
+            {
+                return imageName.split(":")[1];
+            }
+            
+            return "latest";
+        }
+        
+        return null;
+    }
+    
+    public String getImageNameWithoutTag()
+    {
+        if (StringUtils.isNotBlank(imageName))
+        {
+            return imageName.split(":")[0];
+        }
+        
+        return null;
     }
 
     public String getImageId()
@@ -117,7 +144,7 @@ public class Container
     
     public boolean isStoppable()
     {
-        return (state == ContainerState.UP);
+        return (state == ContainerState.UP || state == ContainerState.RESTARTING);
     }
     
     public boolean isRestartable()

@@ -1,4 +1,4 @@
-package com.itelg.docker.cawandu.repository.docker;
+package com.itelg.docker.cawandu.repository.dockerclient;
 
 import com.itelg.docker.cawandu.domain.image.UpdateState;
 import com.spotify.docker.client.DockerException;

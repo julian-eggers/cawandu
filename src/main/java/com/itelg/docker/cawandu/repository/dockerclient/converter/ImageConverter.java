@@ -1,4 +1,4 @@
-package com.itelg.docker.cawandu.repository.docker.converter;
+package com.itelg.docker.cawandu.repository.dockerclient.converter;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

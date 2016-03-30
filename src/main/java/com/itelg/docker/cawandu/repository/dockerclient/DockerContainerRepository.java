@@ -1,4 +1,4 @@
-package com.itelg.docker.cawandu.repository.docker;
+package com.itelg.docker.cawandu.repository.dockerclient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
 import com.itelg.docker.cawandu.repository.ContainerRepository;
-import com.itelg.docker.cawandu.repository.docker.converter.ContainerConverter;
+import com.itelg.docker.cawandu.repository.dockerclient.converter.ContainerConverter;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.DockerClient.ListContainersParam;
 import com.spotify.docker.client.messages.ContainerConfig;
@@ -49,8 +49,6 @@ public class DockerContainerRepository implements ContainerRepository
         ContainerInfo containerInfo = getContainerInfoById(container.getId());
         ContainerConfig.Builder containerConfigBuilder = ContainerConfig.builder();
         containerConfigBuilder.hostConfig(containerInfo.hostConfig());
-        containerConfigBuilder.cmd(containerInfo.config().cmd());
-        containerConfigBuilder.entrypoint(containerInfo.config().entrypoint());
         containerConfigBuilder.env(containerInfo.config().env());
         containerConfigBuilder.labels(containerInfo.config().labels());
         containerConfigBuilder.volumes(containerInfo.config().volumes());
