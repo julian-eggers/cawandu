@@ -64,11 +64,11 @@ public class Container
     
     public String getImageTag()
     {
-        if (StringUtils.isNotBlank(imageName))
+        if (StringUtils.isNotBlank(getImageName()))
         {
-            if (imageName.contains(":"))
+            if (getImageName().contains(":"))
             {
-                return imageName.split(":")[1];
+                return getImageName().split(":")[1];
             }
             
             return "latest";
@@ -79,9 +79,9 @@ public class Container
     
     public String getImageNameWithoutTag()
     {
-        if (StringUtils.isNotBlank(imageName))
+        if (StringUtils.isNotBlank(getImageName()))
         {
-            return imageName.split(":")[0];
+            return getImageName().split(":")[0];
         }
         
         return null;
