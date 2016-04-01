@@ -119,11 +119,11 @@ public abstract class AbstractComposer<T extends Component> extends SelectorComp
 
 	public void showWarning(String message)
 	{
-		Messagebox.show(message, "Fehler", Messagebox.OK, Messagebox.EXCLAMATION);
+		Messagebox.show(message, "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
 	}
 
 	public void showError(String message)
 	{
-		Messagebox.show(message, "Fehler", Messagebox.OK, Messagebox.ERROR);
+		Messagebox.show(message, "Error", Messagebox.OK, Messagebox.ERROR);
 	}
 }

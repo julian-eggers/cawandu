@@ -17,7 +17,7 @@
     <coveralls.version>4.1.0</coveralls.version>
     <powermock.version>1.6.4</powermock.version>
     <easymock.version>3.4</easymock.version>
-    <zk.version>7.0.3</zk.version>
+    <zk.version>8.0.1.1</zk.version>
     <zkspring.version>3.2.0</zkspring.version>
   </properties>
 

@@ -128,6 +128,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem startContainerMenuitem = new Menuitem("Start container");
             startContainerMenuitem.setParent(popup);
+            startContainerMenuitem.setIconSclass("z-icon-play");
             startContainerMenuitem.setDisabled(!container.isStartable());
             startContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -138,6 +139,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem restartContainerMenuitem = new Menuitem("Restart container");
             restartContainerMenuitem.setParent(popup);
+            restartContainerMenuitem.setIconSclass("z-icon-fast-forward");
             restartContainerMenuitem.setDisabled(!container.isRestartable());
             restartContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -148,6 +150,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem stopContainerMenuitem = new Menuitem("Stop container");
             stopContainerMenuitem.setParent(popup);
+            stopContainerMenuitem.setIconSclass("z-icon-stop");
             stopContainerMenuitem.setDisabled(!container.isStoppable());
             stopContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -158,6 +161,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem removeContainerMenuitem = new Menuitem("Remove container");
             removeContainerMenuitem.setParent(popup);
+            removeContainerMenuitem.setIconSclass("z-icon-times");
             removeContainerMenuitem.setDisabled(!container.isRemovable());
             removeContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -168,6 +172,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem killContainerMenuitem = new Menuitem("Kill container");
             killContainerMenuitem.setParent(popup);
+            killContainerMenuitem.setIconSclass("z-icon-flash");
             killContainerMenuitem.setDisabled(!container.isKillable());
             killContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -180,6 +185,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem updateContainerMenuitem = new Menuitem("Update container");
             updateContainerMenuitem.setParent(popup);
+            updateContainerMenuitem.setIconSclass("z-icon-times");
             updateContainerMenuitem.setDisabled(!container.hasUpdate());
             updateContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -190,6 +196,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem switchTagMenuitem = new Menuitem("Switch tag");
             switchTagMenuitem.setParent(popup);
+            switchTagMenuitem.setIconSclass("z-icon-sort");
             switchTagMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 org.zkoss.zk.ui.Component composer = ContainerSwitchTagComposer.show(container);
@@ -205,6 +212,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem recreateContainerMenuitem = new Menuitem("Recreate container");
             recreateContainerMenuitem.setParent(popup);
+            recreateContainerMenuitem.setIconSclass("z-icon-repeat");
             recreateContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 containerService.recreateContainer(container);
@@ -216,6 +224,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem renameContainerMenuitem = new Menuitem("Rename container");
             renameContainerMenuitem.setParent(popup);
+            renameContainerMenuitem.setIconSclass("z-icon-edit");
             renameContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 org.zkoss.zk.ui.Component composer = ContainerRenameComposer.show(container);

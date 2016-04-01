@@ -1,0 +1,10 @@
+/* Required for iconSclass of menuitems */
+.z-menu-content i:not(.z-menu-icon),
+.z-menuitem-content i:not(.z-menu-icon) {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    margin-right: 9px;
+}

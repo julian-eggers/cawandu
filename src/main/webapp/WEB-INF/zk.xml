@@ -26,4 +26,7 @@
     <exception-type>java.lang.Throwable</exception-type>
     <location>/inc/error.zul</location>
   </error-page>
+  <desktop-config>
+    <theme-uri>/css/styles.css</theme-uri>
+  </desktop-config>
 </zk>

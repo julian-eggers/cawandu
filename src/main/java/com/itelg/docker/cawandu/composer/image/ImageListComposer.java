@@ -105,6 +105,7 @@ public class ImageListComposer extends TabComposer
             
             Menuitem showContainersMenuitem = new Menuitem("Show containers");
             showContainersMenuitem.setParent(popup);
+            showContainersMenuitem.setIconSclass("z-icon-th-large");
             showContainersMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 ContainerFilter filter = new ContainerFilter();
@@ -114,6 +115,7 @@ public class ImageListComposer extends TabComposer
             
             Menuitem pullImageMenuitem = new Menuitem("Pull image");
             pullImageMenuitem.setParent(popup);
+            pullImageMenuitem.setIconSclass("z-icon-download");
             pullImageMenuitem.setDisabled(!image.isPullable());
             pullImageMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -140,6 +142,7 @@ public class ImageListComposer extends TabComposer
             
             Menuitem removeImageMenuitem = new Menuitem("Remove image");
             removeImageMenuitem.setParent(popup);
+            removeImageMenuitem.setIconSclass("z-icon-times");
             removeImageMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 if (imageService.removeImage(image))
