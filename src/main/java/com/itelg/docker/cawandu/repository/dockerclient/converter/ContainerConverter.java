@@ -3,6 +3,7 @@ package com.itelg.docker.cawandu.repository.dockerclient.converter;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.core.convert.converter.Converter;
@@ -23,7 +24,7 @@ public class ContainerConverter implements Converter<Container, com.itelg.docker
         container.setName(clientContainer.names().get(0).substring(1, clientContainer.names().get(0).length()));
         container.setImageName(clientContainer.image());
         container.setImageId(clientContainer.imageId());
-        container.setLabels(clientContainer.labels());
+        container.setLabels(new HashMap<>(clientContainer.labels()));
         container.setCreated(LocalDateTime.ofEpochSecond(clientContainer.created().longValue(), 0, ZoneOffset.UTC));
         return container;
     }
