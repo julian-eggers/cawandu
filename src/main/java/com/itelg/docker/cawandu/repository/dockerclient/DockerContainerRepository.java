@@ -50,7 +50,7 @@ public class DockerContainerRepository implements ContainerRepository
         ContainerConfig.Builder containerConfigBuilder = ContainerConfig.builder();
         containerConfigBuilder.hostConfig(containerInfo.hostConfig());
         containerConfigBuilder.env(containerInfo.config().env());
-        containerConfigBuilder.labels(containerInfo.config().labels());
+        containerConfigBuilder.labels(container.getLabels());
         containerConfigBuilder.volumes(containerInfo.config().volumes());
         containerConfigBuilder.image(container.getImageName());
         containerConfigBuilder.exposedPorts(containerInfo.config().exposedPorts());
