@@ -90,6 +90,17 @@ public class ContainerTest
     }
     
     @Test
+    public void testAddLabel()
+    {
+        Container container = new Container();
+        Assert.assertNull(container.getLabels());
+        container.addLabel(Container.IMAGE_NAME_LABEL, "jeggers/cawandu:latest");
+        container.addLabel(Container.IMAGE_NAME_LABEL, "jeggers/cawandu:latest");
+        Assert.assertNotNull(container.getLabels());
+        Assert.assertEquals(1, container.getLabels().size());
+    }
+    
+    @Test
     public void testToString()
     {
         Assert.assertTrue(new Container().toString().startsWith("Container"));

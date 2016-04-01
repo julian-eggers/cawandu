@@ -1,6 +1,7 @@
 package com.itelg.docker.cawandu.domain.container;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 public class Container
 {
     public static final String CONTAINER_NAME_PATTERN = "/?[a-zA-Z0-9_-]+";
+    public static final String IMAGE_NAME_LABEL = "cawandu.image.name";
     
     private String id;
     private ContainerState state;
@@ -49,9 +51,9 @@ public class Container
 
     public String getImageName()
     {
-        if (hasLabel("cawandu.image.name"))
+        if (hasLabel(IMAGE_NAME_LABEL))
         {
-            return getLabel("cawandu.image.name");
+            return getLabel(IMAGE_NAME_LABEL);
         }
         
         return imageName;
@@ -125,6 +127,16 @@ public class Container
         }
         
         return null;
+    }
+    
+    public void addLabel(String key, String value)
+    {
+        if (labels == null)
+        {
+            labels = new HashMap<>();
+        }
+        
+        labels.put(key, value);
     }
 
     public LocalDateTime getCreated()

@@ -42,7 +42,14 @@ public class DefaultContainerService implements ContainerService
     @Override
     public void switchTag(Container container, String tag)
     {
-        container.setImageName(container.getImageNameWithoutTag() + ":" + tag);
+        String imageName = container.getImageNameWithoutTag() + ":" + tag;
+        container.setImageName(imageName);
+        
+        if (container.hasLabel(Container.IMAGE_NAME_LABEL))
+        {
+            container.addLabel(Container.IMAGE_NAME_LABEL, imageName);
+        }
+        
         recreateContainer(container);
     }
     
