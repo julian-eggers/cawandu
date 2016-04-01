@@ -122,6 +122,7 @@ public class ImageListComposer extends TabComposer
                 if (state == UpdateState.PULLED)
                 {
                     showNotification("New version pulled");
+                    refreshListbox();
                 }
                 else if (state == UpdateState.NO_UPDATE) 
                 {

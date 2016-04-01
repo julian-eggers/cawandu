@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.3-RELEASE</version>
+  <version>0.2.4-RELEASE</version>
 
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>

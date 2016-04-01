@@ -136,16 +136,6 @@ public class ContainerListComposer extends TabComposer
                 showNotification("Container started");
             });
             
-            Menuitem stopContainerMenuitem = new Menuitem("Stop container");
-            stopContainerMenuitem.setParent(popup);
-            stopContainerMenuitem.setDisabled(!container.isStoppable());
-            stopContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
-            {
-                containerService.stopContainer(container);
-                refreshListbox();
-                showNotification("Container stopped");
-            });
-            
             Menuitem restartContainerMenuitem = new Menuitem("Restart container");
             restartContainerMenuitem.setParent(popup);
             restartContainerMenuitem.setDisabled(!container.isRestartable());
@@ -154,6 +144,16 @@ public class ContainerListComposer extends TabComposer
                 containerService.restartContainer(container);
                 refreshListbox();
                 showNotification("Container restarted");
+            });
+            
+            Menuitem stopContainerMenuitem = new Menuitem("Stop container");
+            stopContainerMenuitem.setParent(popup);
+            stopContainerMenuitem.setDisabled(!container.isStoppable());
+            stopContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
+            {
+                containerService.stopContainer(container);
+                refreshListbox();
+                showNotification("Container stopped");
             });
             
             Menuitem removeContainerMenuitem = new Menuitem("Remove container");
