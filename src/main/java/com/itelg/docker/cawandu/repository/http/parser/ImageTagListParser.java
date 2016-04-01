@@ -1,6 +1,7 @@
 package com.itelg.docker.cawandu.repository.http.parser;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -14,13 +15,15 @@ public class ImageTagListParser implements Converter<String, List<String>>
     public List<String> convert(String json)
     {
         JSONArray jsonArray = new JSONArray(json);
-        List<String> tags = new ArrayList<>();
+        List<String> tags = new LinkedList<>();
 
         for (int i = 0; i < jsonArray.length(); i++)
         {
             tags.add(jsonArray.getJSONObject(i).get("name").toString());
         }
         
+        Collections.sort(tags);
+        Collections.reverse(tags);
         return tags;
     }
 }

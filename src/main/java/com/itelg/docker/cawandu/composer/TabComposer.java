@@ -6,7 +6,6 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Window;
 
 import com.itelg.docker.cawandu.composer.zk.events.TabCreatedEvent;
-import com.itelg.docker.cawandu.composer.zk.events.TabDeleteEvent;
 
 public abstract class TabComposer extends AbstractComposer<Window>
 {
@@ -47,7 +46,6 @@ public abstract class TabComposer extends AbstractComposer<Window>
 
 	protected void close(Object data)
 	{
-		publish(new TabDeleteEvent(tabId, getSelf()));
 		Events.postEvent(Events.ON_CLOSE, getSelf(), data);
 	}
 }

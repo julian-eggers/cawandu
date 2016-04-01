@@ -18,10 +18,4 @@
       </tabpanel>
     </tabpanels>
   </tabbox>
-  <menupopup id="tabMenuPopup">
-    <menuitem id="closeAllTabsMenuitem" label="${labels.menu.tab.closeAll}" />
-    <menuitem id="closeOtherTabsMenuitem" label="${labels.menu.tab.closeOther}" />
-    <menuitem id="closeLeftTabsMenuitem" label="${labels.menu.tab.closeLeft}" />
-    <menuitem id="closeRightTabsMenuitem" label="${labels.menu.tab.closeRight}" />
-  </menupopup>
 </zk>
