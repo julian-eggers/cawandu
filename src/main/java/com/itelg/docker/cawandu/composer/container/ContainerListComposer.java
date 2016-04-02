@@ -25,6 +25,7 @@ import org.zkoss.zul.Textbox;
 
 import com.itelg.docker.cawandu.composer.TabComposer;
 import com.itelg.docker.cawandu.composer.zk.WireArg;
+import com.itelg.docker.cawandu.composer.zk.events.ImagePulledEvent;
 import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
 import com.itelg.docker.cawandu.domain.container.ContainerState;
@@ -33,6 +34,8 @@ import com.itelg.zkoss.helper.combobox.ComboboxHelper;
 import com.itelg.zkoss.helper.i18n.Labels;
 import com.itelg.zkoss.helper.listbox.ListboxHelper;
 import com.itelg.zkoss.helper.listbox.ListcellHelper;
+
+import de.jaggl.utils.events.zk.annotations.Processing;
 
 @Component
 @Scope("request")
@@ -75,7 +78,8 @@ public class ContainerListComposer extends TabComposer
     {
         containerListbox.setItemRenderer(new ContainerListitemRenderer());
     }
-    
+
+    @Processing(ImagePulledEvent.class)
     private void refreshListbox()
     {
         containerListbox.setModel(new ListModelList<>(containerService.getContainersByFilter(filter)));

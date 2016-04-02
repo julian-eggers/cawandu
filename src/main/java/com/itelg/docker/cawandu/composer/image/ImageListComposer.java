@@ -23,6 +23,7 @@ import org.zkoss.zul.Textbox;
 import com.itelg.docker.cawandu.composer.TabComposer;
 import com.itelg.docker.cawandu.composer.container.ContainerListComposer;
 import com.itelg.docker.cawandu.composer.zk.WireArg;
+import com.itelg.docker.cawandu.composer.zk.events.ImagePulledEvent;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
 import com.itelg.docker.cawandu.domain.image.Image;
 import com.itelg.docker.cawandu.domain.image.ImageFilter;
@@ -125,6 +126,7 @@ public class ImageListComposer extends TabComposer
                 {
                     showNotification("New version pulled");
                     refreshListbox();
+                    publish(new ImagePulledEvent(image));
                 }
                 else if (state == UpdateState.NO_UPDATE) 
                 {
