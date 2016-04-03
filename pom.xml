@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.8-RELEASE</version>
+  <version>0.2.9-RELEASE</version>
 
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>
@@ -69,44 +69,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.6</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <!-- TEST AND COVERAGE -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -128,42 +90,6 @@
         <version>${coveralls.version}</version>
       </plugin>
       <!-- DEPLOYMENT -->
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.5.3</version>
-        <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <useReleaseProfile>false</useReleaseProfile>
-          <releaseProfiles>release</releaseProfiles>
-          <goals>deploy</goals>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.scm</groupId>
-            <artifactId>maven-scm-provider-gitexe</artifactId>
-            <version>1.9.4</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>de.jutzig</groupId>
-        <artifactId>github-release-plugin</artifactId>
-        <version>1.1.1</version>
-        <executions>
-          <execution>
-            <id>github-upload</id>
-            <phase>deploy</phase>
-            <goals>
-              <goal>release</goal>
-            </goals>
-            <configuration>
-              <releaseName>${project.version}</releaseName>
-              <tag>${project.version}</tag>
-              <artifact>${project.build.directory}/${project.artifactId}-${project.version}.jar</artifact>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
@@ -275,11 +201,6 @@
       <groupId>org.zkoss.zk</groupId>
       <artifactId>zkplus</artifactId>
       <version>${zk.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.zkoss.zkforge</groupId>
-      <artifactId>ckez</artifactId>
-      <version>3.6.0.0</version>
     </dependency>
     <dependency>
       <groupId>de.jaggl.utils</groupId>

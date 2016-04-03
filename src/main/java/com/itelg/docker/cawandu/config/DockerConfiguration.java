@@ -33,6 +33,7 @@ public class DockerConfiguration
     @PostConstruct
     public void postConstruct()
     {
+        // Required to fix a bug in docker-maven-plugin
         dockerRegistryUsername = env.getProperty("docker.registry.username").replace("null", "");
         dockerRegistryEmail = env.getProperty("docker.registry.email").replace("null", "");
         dockerRegistryPassword = env.getProperty("docker.registry.password").replace("null", "");
@@ -45,7 +46,8 @@ public class DockerConfiguration
     {
         DefaultDockerClient.Builder dockerClientBuilder = getDockerClientBuilder();
         dockerClientBuilder.authConfig(getAuthConfig());
-        return dockerClientBuilder.build();
+        DockerClient dockerClient = dockerClientBuilder.build();
+        return dockerClient;
     }
     
     private DefaultDockerClient.Builder getDockerClientBuilder() throws DockerCertificateException
@@ -79,5 +81,11 @@ public class DockerConfiguration
         }
         
         return null;
+    }
+    
+    @Bean
+    public String dockerHost(DockerClient dockerClient)
+    {
+        return dockerClient.getHost();
     }
 }
