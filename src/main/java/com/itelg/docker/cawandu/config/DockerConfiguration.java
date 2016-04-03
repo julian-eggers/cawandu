@@ -16,6 +16,7 @@ import com.spotify.docker.client.DefaultDockerClient;
 import com.spotify.docker.client.DockerCertificateException;
 import com.spotify.docker.client.DockerCertificates;
 import com.spotify.docker.client.DockerClient;
+import com.spotify.docker.client.DockerException;
 import com.spotify.docker.client.messages.AuthConfig;
 
 @Configuration
@@ -84,8 +85,8 @@ public class DockerConfiguration
     }
     
     @Bean
-    public String dockerHost(DockerClient dockerClient)
+    public String dockerHost(DockerClient dockerClient) throws DockerException, InterruptedException
     {
-        return dockerClient.getHost();
+        return dockerClient.info().name();
     }
 }
