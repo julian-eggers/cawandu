@@ -4,16 +4,16 @@
   <window apply="${containerListComposer}" border="normal">
     <groupbox mold="3d" closable="false">
       <caption label="Search" />
-      <label value="State: " />
+      <label value="State: " style="font-weight: bold;" />
       <combobox id="stateCombobox" />
       <space width="30px" />
-      <label value="Name: " />
+      <label value="Name: " style="font-weight: bold;"/>
       <textbox id="nameTextbox" />
       <space width="30px" />
-      <label value="ID: " />
+      <label value="ID: " style="font-weight: bold;" />
       <textbox id="idTextbox" />
       <space width="30px" />
-      <label value="Image-Name: " />
+      <label value="Image-Name: " style="font-weight: bold;" />
       <textbox id="imageNameTextbox" />
       <space width="30px" />
       <button id="searchSubmitButton" label="Search" />
@@ -26,7 +26,7 @@
         <listheader label="ID" sort="auto(id)" />
         <listheader label="State" sort="auto(state)" />
         <listheader label="Name" sort="auto(name)" />
-        <listheader label="Image" sort="auto(image)" />
+        <listheader label="Image" sort="auto(imageName)" />
         <listheader label="Created" sort="auto(created)" />
       </listhead>
     </listbox>

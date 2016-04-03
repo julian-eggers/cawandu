@@ -189,7 +189,7 @@ public class ContainerListComposer extends TabComposer
             
             Menuitem updateContainerMenuitem = new Menuitem("Update container");
             updateContainerMenuitem.setParent(popup);
-            updateContainerMenuitem.setIconSclass("z-icon-times");
+            updateContainerMenuitem.setIconSclass("z-icon-caret-up");
             updateContainerMenuitem.setDisabled(!container.hasUpdate());
             updateContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
@@ -243,11 +243,21 @@ public class ContainerListComposer extends TabComposer
             });
             
             new Listcell(container.getId()).setParent(item);
-            new Listcell(Labels.getLabel(container.getState())).setParent(item);
+            
+            Listcell stateListcell = new Listcell(Labels.getLabel(container.getState()));
+            stateListcell.setParent(item);
+            stateListcell.setStyle("background-color: " + container.getState().getColor());
+
             new Listcell(container.getName()).setParent(item);
             Listcell imageNameListcell = new Listcell(container.getImageName());
             imageNameListcell.setParent(item);
-            imageNameListcell.setStyle(container.hasUpdate() ? "color:green" : "");
+            
+            if (container.hasUpdate())
+            {
+                imageNameListcell.setStyle("background-color: orange;");
+                imageNameListcell.setTooltiptext("Update available");
+            }
+            
             ListcellHelper.buildDateTimeListcell(container.getCreated()).setParent(item);
         }
     }

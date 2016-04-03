@@ -44,7 +44,7 @@ jeggers/cawandu:latest
 | ------------- | ------------- | ------------- | ------------- |
 | HOST_URI  | no  |  | https://192.168.0.55:2376 |
 | HOST_CERTIFICATES  | no  |  | /home/avidesit/.docker/machine/certs |
-| REGISTRY_USERNAME  | no  |  | avides |
-| REGISTRY_EMAIL  | no  |  | info@avides.com  |
+| REGISTRY_USERNAME  | no  |  | jeggers |
+| REGISTRY_EMAIL  | no  |  | eggers.julian@gmail.com  |
 | REGISTRY_PASSWORD  | no  |  | 123456  |
 | PULL_MODE | no | RUNNING | (ALL, RUNNING, NONE) |

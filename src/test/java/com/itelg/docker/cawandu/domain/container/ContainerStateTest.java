@@ -6,6 +6,12 @@ import org.junit.Test;
 public class ContainerStateTest
 {
     @Test
+    public void testGetColor()
+    {
+        Assert.assertEquals("orange", ContainerState.PAUSED.getColor());
+    }
+    
+    @Test
     public void testFromString()
     {
         Assert.assertEquals(ContainerState.UP, ContainerState.fromString("Up"));

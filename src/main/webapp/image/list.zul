@@ -4,10 +4,10 @@
   <window apply="${imageListComposer}" border="normal">
     <groupbox mold="3d" closable="false">
       <caption label="Search" />
-      <label value="Name: " />
+      <label value="Name: " style="font-weight: bold;" />
       <textbox id="nameTextbox" />
       <space width="30px" />
-      <label value="ID: " />
+      <label value="ID: " style="font-weight: bold;" />
       <textbox id="idTextbox" />
       <space width="30px" />
       <button id="searchSubmitButton" label="Search" />
