@@ -8,3 +8,11 @@
     text-align: center;
     margin-right: 9px;
 }
+
+.z-menu-content i:not(.z-menu-icon) {
+	margin-right: 2px;
+}
+
+.z-menuitem-content i:not(.z-menu-icon) {
+	margin-right: 9px;
+}

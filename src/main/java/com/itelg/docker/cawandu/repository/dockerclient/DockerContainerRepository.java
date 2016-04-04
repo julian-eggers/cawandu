@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
+import com.itelg.docker.cawandu.domain.container.ContainerState;
 import com.itelg.docker.cawandu.repository.ContainerRepository;
 import com.itelg.docker.cawandu.repository.dockerclient.converter.ContainerConverter;
 import com.spotify.docker.client.DockerClient;
@@ -60,8 +61,12 @@ public class DockerContainerRepository implements ContainerRepository
         stopContainer(container);
         removeContainer(container);
         String containerId = createContainer(containerConfigBuilder.build(), container.getName());
-        Container newContainer = getContainerById(containerId);
-        startContainer(newContainer);
+        
+        if (container.getState() == ContainerState.UP)
+        {
+            Container newContainer = getContainerById(containerId);
+            startContainer(newContainer);            
+        }
     }
     
     private ContainerInfo getContainerInfoById(String id)
