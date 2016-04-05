@@ -1,7 +1,10 @@
 Cawandu
 ============
 
-## !Under development!
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/289236a7e7b046eb89a6a0ae63863a28)](https://www.codacy.com/app/eggers-julian/cawandu)
+[![Coverage Status](https://coveralls.io/repos/julian-eggers/cawandu/badge.svg?branch=master&service=github)](https://coveralls.io/github/julian-eggers/cawandu?branch=master)
+[![Build Status](https://travis-ci.org/julian-eggers/cawandu.svg?branch=master)](https://travis-ci.org/julian-eggers/cawandu)
+
 
 
 ## Docker
