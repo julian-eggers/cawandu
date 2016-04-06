@@ -6,8 +6,29 @@ Cawandu
 [![Build Status](https://travis-ci.org/julian-eggers/cawandu.svg?branch=master)](https://travis-ci.org/julian-eggers/cawandu)
 
 
+## Features
+### Container
+- Search container by id, name, state and image
+- Start, stop, restart, remove and kill containers
+- Recreate containers (remove old and start new container)
+- Update container (Pull current image and start new container)
+- Switch image-tag (Select tag from registry, pull and start new container)
+- Rename container
 
-## Docker
+### Images
+- Search images by id and name
+- Automatically pull updates of used images
+- Pull and delete images
+- Search images by id and name
+
+
+# Stack
+[Spring](https://spring.io/)
+[Zkoss](http://www.zkoss.org/)
+[Docker-Client](https://github.com/spotify/docker-client)
+
+
+# Docker
 [Dockerhub](https://hub.docker.com/r/jeggers/cawandu/)
 
 ### Local
