@@ -174,7 +174,7 @@ public class ContainerListComposer extends TabComposer
                 showNotification("Container removed");
             });
             
-            Menuitem killContainerMenuitem = new Menuitem("Kill container");
+            Menuitem killContainerMenuitem = new Menuitem("Kill & remove container");
             killContainerMenuitem.setParent(popup);
             killContainerMenuitem.setIconSclass("z-icon-flash");
             killContainerMenuitem.setDisabled(!container.isKillable());

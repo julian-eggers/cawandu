@@ -159,6 +159,9 @@ public class DefaultContainerServiceTest
         containerRepository.killContainer(EasyMock.anyObject(Container.class));
         PowerMock.expectLastCall();
         
+        containerRepository.removeContainer(EasyMock.anyObject(Container.class));
+        PowerMock.expectLastCall();
+        
         PowerMock.replayAll();
         containerService.killContainer(new Container());
         PowerMock.verifyAll();

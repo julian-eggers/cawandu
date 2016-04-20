@@ -85,6 +85,7 @@ public class DefaultContainerService implements ContainerService
     public void killContainer(Container container)
     {
         containerRepository.killContainer(container);
+        containerRepository.removeContainer(container);
         log.info("Container killed (" + container + ")");        
     }
     

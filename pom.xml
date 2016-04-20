@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.10-RELEASE</version>
+  <version>0.2.11-RELEASE</version>
 
   <properties>
     <timestamp>${maven.build.timestamp}</timestamp>
@@ -93,7 +93,7 @@
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.4.2</version>
+        <version>0.4.5</version>
         <configuration>
           <serverId>dockerhub-jeggers</serverId>
           <imageName>jeggers/${project.artifactId}</imageName>
@@ -114,9 +114,10 @@
             <HOST_CERTIFICATES></HOST_CERTIFICATES>
             <HTTP_PORT>7777</HTTP_PORT>
             <PULL_MODE>RUNNING</PULL_MODE>
+            <MAX_HEAP>200M</MAX_HEAP>
             <JAVA_OPTS>-Dfoo=bar</JAVA_OPTS>
           </env>
-          <cmd>["/bin/sh", "-c", "java -Ddocker.registry.username=${REGISTRY_USERNAME} -Ddocker.registry.email=${REGISTRY_EMAIL} -Ddocker.registry.password=${REGISTRY_PASSWORD} -Ddocker.host.uri=${HOST_URI} -Ddocker.host.certificates.directory=${HOST_CERTIFICATES} -Ddocker.pullMode=${PULL_MODE} -Dserver.port=${HTTP_PORT} -Dfile.encoding=UTF-8 ${JAVA_OPTS} -jar /${project.build.finalName}.${project.packaging}"]</cmd>
+          <cmd>["/bin/sh", "-c", "java -Ddocker.registry.username=${REGISTRY_USERNAME} -Ddocker.registry.email=${REGISTRY_EMAIL} -Ddocker.registry.password=${REGISTRY_PASSWORD} -Ddocker.host.uri=${HOST_URI} -Ddocker.host.certificates.directory=${HOST_CERTIFICATES} -Ddocker.pullMode=${PULL_MODE} -Dserver.port=${HTTP_PORT} -Dfile.encoding=UTF-8 -Xmx${MAX_HEAP} ${JAVA_OPTS} -jar /${project.build.finalName}.${project.packaging}"]</cmd>
           <resources>
             <resource>
               <targetPath>/</targetPath>
