@@ -8,13 +8,13 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
-public class ImageTagListParserTest
+public class RegistryImageTagListParserTest
 {
     @Test
     public void testParse() throws IOException
     {
-        String json = IOUtils.toString(new ClassPathResource("imageTags.json").getInputStream());
-        List<String> tags = new ImageTagListParser().convert(json);
+        String json = IOUtils.toString(new ClassPathResource("registryImageTags.json").getInputStream());
+        List<String> tags = new RegistryImageTagListParser().convert(json);
         Assert.assertNotNull(tags);
         Assert.assertEquals(7, tags.size());
         Assert.assertEquals("latest", tags.get(0));
