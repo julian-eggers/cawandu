@@ -6,17 +6,20 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.13-RELEASE</version>
+  <version>0.2.14-RELEASE</version>
 
   <properties>
+    <!-- System -->
     <timestamp>${maven.build.timestamp}</timestamp>
     <maven.build.timestamp.format>dd.MM.yyyy HH:mm</maven.build.timestamp.format>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
+    <!-- Testing -->
     <cobertura.version>2.7</cobertura.version>
     <coveralls.version>4.1.0</coveralls.version>
     <powermock.version>1.6.4</powermock.version>
     <easymock.version>3.4</easymock.version>
+    <!-- UI -->
     <zk.version>8.0.1.1</zk.version>
     <zkspring.version>3.2.0</zkspring.version>
   </properties>
@@ -24,7 +27,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.3.3.RELEASE</version>
+    <version>1.3.5.RELEASE</version>
   </parent>
 
   <scm>
@@ -93,7 +96,7 @@
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.4.5</version>
+        <version>0.4.10</version>
         <configuration>
           <serverId>dockerhub-jeggers</serverId>
           <imageName>jeggers/${project.artifactId}</imageName>
@@ -243,7 +246,7 @@
     <dependency>
       <groupId>com.spotify</groupId>
       <artifactId>docker-client</artifactId>
-      <version>3.6.4</version>
+      <version>5.0.2</version>
     </dependency>
     <dependency>
       <groupId>org.json</groupId>

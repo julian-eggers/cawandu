@@ -50,7 +50,7 @@ public class ContainerListComposer extends TabComposer
     private @Wire Textbox idTextbox;
     private @Wire Textbox imageNameTextbox;
     private @WireArg("filter") ContainerFilter filter;
-    
+
     @Override
     protected void afterCompose()
     {
@@ -59,7 +59,7 @@ public class ContainerListComposer extends TabComposer
         refreshListbox();
         setTitle(buildTitle());
     }
-    
+
     private void initFilter()
     {
         ComboboxHelper.setDefaultItem(stateCombobox, "Show all");
@@ -68,12 +68,12 @@ public class ContainerListComposer extends TabComposer
             item.setValue(status);
             item.setLabel(Labels.getLabel(status));
         });
-        
+
         nameTextbox.setValue(filter.getName());
         idTextbox.setValue(filter.getId());
         imageNameTextbox.setValue(filter.getImageName());
     }
-    
+
     private void initListbox()
     {
         containerListbox.setItemRenderer(new ContainerListitemRenderer());
@@ -85,7 +85,7 @@ public class ContainerListComposer extends TabComposer
         containerListbox.setModel(new ListModelList<>(containerService.getContainersByFilter(filter)));
         ListboxHelper.hideIfEmpty(containerListbox, "No containers found");
     }
-    
+
     private String buildTitle()
     {
         String title = "Container";
@@ -100,12 +100,12 @@ public class ContainerListComposer extends TabComposer
         {
             filterProperties.add("Name: " + filter.getName());
         }
-        
+
         if (StringUtils.isNotBlank(filter.getId()))
         {
             filterProperties.add("ID: " + filter.getId());
         }
-        
+
         if (StringUtils.isNotBlank(filter.getImageName()))
         {
             filterProperties.add("Image-Name: " + filter.getImageName());
@@ -118,7 +118,7 @@ public class ContainerListComposer extends TabComposer
 
         return title;
     }
-    
+
     private class ContainerListitemRenderer implements ListitemRenderer<Container>
     {
         @Override
@@ -129,7 +129,7 @@ public class ContainerListComposer extends TabComposer
             item.setContext(popup);
             item.setPopup(popup);
             item.setValue(container);
-            
+
             Menuitem startContainerMenuitem = new Menuitem("Start container");
             startContainerMenuitem.setParent(popup);
             startContainerMenuitem.setIconSclass("z-icon-play");
@@ -140,7 +140,7 @@ public class ContainerListComposer extends TabComposer
                 refreshListbox();
                 showNotification("Container started");
             });
-            
+
             Menuitem restartContainerMenuitem = new Menuitem("Restart container");
             restartContainerMenuitem.setParent(popup);
             restartContainerMenuitem.setIconSclass("z-icon-fast-forward");
@@ -151,7 +151,7 @@ public class ContainerListComposer extends TabComposer
                 refreshListbox();
                 showNotification("Container restarted");
             });
-            
+
             Menuitem stopContainerMenuitem = new Menuitem("Stop container");
             stopContainerMenuitem.setParent(popup);
             stopContainerMenuitem.setIconSclass("z-icon-stop");
@@ -162,7 +162,7 @@ public class ContainerListComposer extends TabComposer
                 refreshListbox();
                 showNotification("Container stopped");
             });
-            
+
             Menuitem removeContainerMenuitem = new Menuitem("Remove container");
             removeContainerMenuitem.setParent(popup);
             removeContainerMenuitem.setIconSclass("z-icon-times");
@@ -173,7 +173,7 @@ public class ContainerListComposer extends TabComposer
                 refreshListbox();
                 showNotification("Container removed");
             });
-            
+
             Menuitem killContainerMenuitem = new Menuitem("Kill & remove container");
             killContainerMenuitem.setParent(popup);
             killContainerMenuitem.setIconSclass("z-icon-flash");
@@ -184,9 +184,9 @@ public class ContainerListComposer extends TabComposer
                 refreshListbox();
                 showNotification("Container killed");
             });
-            
+
             popup.appendChild(new Menuseparator());
-            
+
             Menuitem updateContainerMenuitem = new Menuitem("Update container");
             updateContainerMenuitem.setParent(popup);
             updateContainerMenuitem.setIconSclass("z-icon-caret-up");
@@ -197,10 +197,11 @@ public class ContainerListComposer extends TabComposer
                 refreshListbox();
                 showNotification("Container updated");
             });
-            
+
             Menuitem switchTagMenuitem = new Menuitem("Switch tag");
             switchTagMenuitem.setParent(popup);
             switchTagMenuitem.setIconSclass("z-icon-sort");
+            switchTagMenuitem.setDisabled(container.getImageTag() != null);
             switchTagMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 org.zkoss.zk.ui.Component composer = ContainerSwitchTagComposer.show(container);
@@ -209,11 +210,11 @@ public class ContainerListComposer extends TabComposer
                     if (closeEvent.getData() != null)
                     {
                         refreshListbox();
-                        showNotification("Tag swiched");                        
+                        showNotification("Tag swiched");
                     }
                 });
             });
-            
+
             Menuitem recreateContainerMenuitem = new Menuitem("Recreate container");
             recreateContainerMenuitem.setParent(popup);
             recreateContainerMenuitem.setIconSclass("z-icon-repeat");
@@ -223,9 +224,9 @@ public class ContainerListComposer extends TabComposer
                 refreshListbox();
                 showNotification("Container recreated");
             });
-            
+
             popup.appendChild(new Menuseparator());
-            
+
             Menuitem renameContainerMenuitem = new Menuitem("Rename container");
             renameContainerMenuitem.setParent(popup);
             renameContainerMenuitem.setIconSclass("z-icon-edit");
@@ -237,13 +238,13 @@ public class ContainerListComposer extends TabComposer
                     if (closeEvent.getData() != null)
                     {
                         refreshListbox();
-                        showNotification("Container renamed");                        
+                        showNotification("Container renamed");
                     }
                 });
             });
-            
+
             new Listcell(container.getId()).setParent(item);
-            
+
             Listcell stateListcell = new Listcell(Labels.getLabel(container.getState()));
             stateListcell.setParent(item);
             stateListcell.setStyle("background-color: " + container.getState().getColor());
@@ -251,17 +252,17 @@ public class ContainerListComposer extends TabComposer
             new Listcell(container.getName()).setParent(item);
             Listcell imageNameListcell = new Listcell(container.getImageName());
             imageNameListcell.setParent(item);
-            
+
             if (container.hasUpdate())
             {
                 imageNameListcell.setStyle("background-color: orange;");
                 imageNameListcell.setTooltiptext("Update available");
             }
-            
+
             ListcellHelper.buildDateTimeListcell(container.getCreated()).setParent(item);
         }
     }
-    
+
     @Listen("onClick = #searchSubmitButton")
     public void onExecuteFilter()
     {
@@ -283,12 +284,12 @@ public class ContainerListComposer extends TabComposer
         imageNameTextbox.setValue("");
         onExecuteFilter();
     }
-    
+
     public static void show()
     {
         show(new ContainerFilter());
     }
-    
+
     public static void show(ContainerFilter filter)
     {
         show("/container/list.zul", Collections.singletonMap("filter", filter));
