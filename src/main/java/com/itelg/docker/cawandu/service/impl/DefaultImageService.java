@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.stereotype.Service;
 
 import com.itelg.docker.cawandu.domain.container.Container;
@@ -27,6 +28,9 @@ public class DefaultImageService implements ImageService
     @Autowired
     private ContainerService containerService;
 
+    @Autowired
+    private CounterService counterService;
+
     @Override
     public UpdateState pullImage(Image image)
     {
@@ -40,6 +44,7 @@ public class DefaultImageService implements ImageService
     {
         UpdateState state = imageRepository.pullImage(imageName);
         log.info("Image pulled - " + state + " - (" + imageName + ")");
+        counterService.increment("images.pulled");
         return state;
     }
 

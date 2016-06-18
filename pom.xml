@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.14-RELEASE</version>
+  <version>0.2.15-RELEASE</version>
 
   <properties>
     <!-- System -->
@@ -215,6 +215,16 @@
       <groupId>com.itelg</groupId>
       <artifactId>zkoss-helper</artifactId>
       <version>0.2.3-RELEASE</version>
+    </dependency>
+
+    <!-- Logging & Monitoring -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jolokia</groupId>
+      <artifactId>jolokia-core</artifactId>
     </dependency>
 
     <!-- Testing -->
