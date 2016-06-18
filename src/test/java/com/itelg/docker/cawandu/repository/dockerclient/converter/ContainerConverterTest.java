@@ -26,7 +26,7 @@ public class ContainerConverterTest
         Whitebox.setInternalState(clientContainer, "imageId", "123456789");
         Whitebox.setInternalState(clientContainer, "labels", ImmutableMap.of("key", "value"));
         Whitebox.setInternalState(clientContainer, "created", Long.valueOf(1459512451));
-        
+
         com.itelg.docker.cawandu.domain.container.Container container = new ContainerConverter().convert(clientContainer);
         Assert.assertEquals("123", container.getId());
         Assert.assertEquals(ContainerState.UP, container.getState());

@@ -18,13 +18,13 @@ import com.itelg.docker.cawandu.service.ImageService;
 public class ImagePullTask
 {
     private static final Logger log = LoggerFactory.getLogger(ImagePullTask.class);
-    
+
     @Value("${docker.pullMode}")
     private PullMode pullMode;
-    
+
     @Autowired
     private ImageService imageService;
-    
+
     @ManagedOperation
     @Scheduled(fixedDelay = 60000)
     public void run()
@@ -34,9 +34,9 @@ public class ImagePullTask
         {
             return;
         }
-        
+
         log.info("ImagePullTask started");
-        
+
         for (Image image : imageService.getAllImages())
         {
             if (image.isPullable())
@@ -44,7 +44,7 @@ public class ImagePullTask
                 imageService.pullImage(image);
             }
         }
-        
+
         log.info("ImagePullTask finished");
     }
 }

@@ -40,23 +40,23 @@ public class HttpRegistryRepository implements RegistryRepository
 
     @Value("${docker.registry.auth.url}")
     private String registryAuthUrl;
-    
+
     @Value("${docker.registry.auth.service}")
     private String registryAuthService;
-    
+
     @Value("${docker.registry.index.url}")
     private String registryIndexUrl;
-    
-    @Value("${docker.registry.username}") 
+
+    @Value("${docker.registry.username}")
     private String registryUsername;
 
-    @Value("${docker.registry.password}") 
+    @Value("${docker.registry.password}")
     private String registryPassword;
 
-    @Autowired 
+    @Autowired
     private RegistryAuthTokenParser authTokenParser;
 
-    @Autowired 
+    @Autowired
     private RegistryImageTagListParser imageTagListParser;
 
     @PostConstruct

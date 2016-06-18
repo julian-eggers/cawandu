@@ -23,13 +23,13 @@ import com.spotify.docker.client.messages.ContainerInfo;
 public class DockerContainerRepository implements ContainerRepository
 {
     private static final Logger log = LoggerFactory.getLogger(DockerContainerRepository.class);
-    
+
     @Autowired
     private DockerClient dockerClient;
-    
+
     @Autowired
     private ContainerConverter containerConverter;
-    
+
     @Override
     public void renameContainer(Container container, String newName)
     {
@@ -43,7 +43,7 @@ public class DockerContainerRepository implements ContainerRepository
             log.error(e.getMessage());
         }
     }
-    
+
     @Override
     public void recreateContainer(Container container)
     {
@@ -61,14 +61,14 @@ public class DockerContainerRepository implements ContainerRepository
         stopContainer(container);
         removeContainer(container);
         String containerId = createContainer(containerConfigBuilder.build(), container.getName());
-        
+
         if (container.getState() == ContainerState.UP)
         {
             Container newContainer = getContainerById(containerId);
-            startContainer(newContainer);            
+            startContainer(newContainer);
         }
     }
-    
+
     private ContainerInfo getContainerInfoById(String id)
     {
         try
@@ -79,10 +79,10 @@ public class DockerContainerRepository implements ContainerRepository
         {
             log.error(e.getMessage(), e);
         }
-        
+
         return null;
     }
-    
+
     private String createContainer(ContainerConfig containerConfig, String name)
     {
         try
@@ -93,10 +93,10 @@ public class DockerContainerRepository implements ContainerRepository
         {
             log.error(e.getMessage(), e);
         }
-        
+
         return null;
     }
-    
+
     @Override
     public void startContainer(Container container)
     {
@@ -107,7 +107,7 @@ public class DockerContainerRepository implements ContainerRepository
         catch (Exception e)
         {
             log.error(e.getMessage(), e);
-        }        
+        }
     }
 
     @Override
@@ -120,9 +120,9 @@ public class DockerContainerRepository implements ContainerRepository
         catch (Exception e)
         {
             log.error(e.getMessage(), e);
-        }        
+        }
     }
-    
+
     @Override
     public void restartContainer(Container container)
     {
@@ -133,7 +133,7 @@ public class DockerContainerRepository implements ContainerRepository
         catch (Exception e)
         {
             log.error(e.getMessage(), e);
-        }   
+        }
     }
 
     @Override
@@ -146,9 +146,9 @@ public class DockerContainerRepository implements ContainerRepository
         catch (Exception e)
         {
             log.error(e.getMessage(), e);
-        }        
+        }
     }
-    
+
     @Override
     public void killContainer(Container container)
     {
@@ -159,35 +159,35 @@ public class DockerContainerRepository implements ContainerRepository
         catch (Exception e)
         {
             log.error(e.getMessage(), e);
-        }          
+        }
     }
-    
+
     @Override
     public Container getContainerById(String id)
     {
         ContainerFilter filter = new ContainerFilter();
         filter.setId(id);
         List<Container> containers = getContainersByFilter(filter);
-        
+
         return (containers.isEmpty() ? null : containers.get(0));
     }
-    
+
     @Override
     public Container getContainerByName(String name)
     {
         ContainerFilter filter = new ContainerFilter();
         filter.setName(name);
         List<Container> containers = getContainersByFilter(filter);
-        
+
         return (containers.isEmpty() ? null : containers.get(0));
     }
-    
+
     @Override
     public List<Container> getContainersByFilter(ContainerFilter filter)
     {
         List<Container> allContainers = getAllContainers();
         List<Container> filteredContainers = new ArrayList<>(allContainers);
-        
+
         for (Container container : allContainers)
         {
             if (StringUtils.isNotBlank(filter.getId()))
@@ -197,7 +197,7 @@ public class DockerContainerRepository implements ContainerRepository
                     filteredContainers.remove(container);
                 }
             }
-            
+
             if (StringUtils.isNotBlank(filter.getName()))
             {
                 if (!container.getName().contains(filter.getName()))
@@ -205,7 +205,7 @@ public class DockerContainerRepository implements ContainerRepository
                     filteredContainers.remove(container);
                 }
             }
-            
+
             if (filter.getState() != null)
             {
                 if (container.getState() != filter.getState())
@@ -213,7 +213,7 @@ public class DockerContainerRepository implements ContainerRepository
                     filteredContainers.remove(container);
                 }
             }
-            
+
             if (StringUtils.isNotBlank(filter.getImageName()))
             {
                 if (!container.getImageName().contains(filter.getImageName()))
@@ -222,10 +222,10 @@ public class DockerContainerRepository implements ContainerRepository
                 }
             }
         }
-        
+
         return filteredContainers;
     }
-    
+
     @Override
     public List<Container> getAllContainers()
     {
@@ -237,7 +237,7 @@ public class DockerContainerRepository implements ContainerRepository
         {
             log.error(e.getMessage(), e);
         }
-        
+
         return null;
     }
 }

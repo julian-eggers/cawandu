@@ -10,7 +10,7 @@ public class Container
 {
     public static final String CONTAINER_NAME_PATTERN = "/?[a-zA-Z0-9_-]+";
     public static final String IMAGE_NAME_LABEL = "cawandu.image.name";
-    
+
     private String id;
     private ContainerState state;
     private String name;
@@ -55,7 +55,7 @@ public class Container
         {
             return getLabel(IMAGE_NAME_LABEL);
         }
-        
+
         return imageName;
     }
 
@@ -63,7 +63,7 @@ public class Container
     {
         this.imageName = imageName;
     }
-    
+
     public String getImageTag()
     {
         if (StringUtils.isNotBlank(getImageName()))
@@ -72,20 +72,20 @@ public class Container
             {
                 return getImageName().split(":")[1];
             }
-            
+
             return "latest";
         }
-        
+
         return null;
     }
-    
+
     public String getImageNameWithoutTag()
     {
         if (StringUtils.isNotBlank(getImageName()))
         {
             return getImageName().split(":")[0];
         }
-        
+
         return null;
     }
 
@@ -108,34 +108,34 @@ public class Container
     {
         this.labels = labels;
     }
-    
+
     public boolean hasLabel(String key)
     {
         if (labels != null)
         {
             return labels.containsKey(key);
         }
-        
+
         return false;
     }
-    
+
     public String getLabel(String key)
     {
         if (labels != null)
         {
             return labels.get(key);
         }
-        
+
         return null;
     }
-    
+
     public void addLabel(String key, String value)
     {
         if (labels == null)
         {
             labels = new HashMap<>();
         }
-        
+
         labels.put(key, value);
     }
 
@@ -148,32 +148,32 @@ public class Container
     {
         this.created = created;
     }
-    
+
     public boolean isStartable()
     {
         return (state == ContainerState.CREATED || state == ContainerState.EXITED);
     }
-    
+
     public boolean isStoppable()
     {
         return (state == ContainerState.UP || state == ContainerState.RESTARTING);
     }
-    
+
     public boolean isRestartable()
     {
         return (state == ContainerState.UP);
     }
-    
+
     public boolean isRemovable()
     {
         return (state == ContainerState.CREATED || state == ContainerState.EXITED);
     }
-    
+
     public boolean isKillable()
     {
         return true;
     }
-    
+
     public boolean hasUpdate()
     {
         return imageId.equals(imageName);

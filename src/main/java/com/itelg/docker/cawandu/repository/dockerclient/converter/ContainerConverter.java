@@ -28,16 +28,16 @@ public class ContainerConverter implements Converter<Container, com.itelg.docker
         container.setCreated(LocalDateTime.ofEpochSecond(clientContainer.created().longValue(), 0, ZoneOffset.UTC));
         return container;
     }
-    
+
     public List<com.itelg.docker.cawandu.domain.container.Container> convert(List<Container> clientContainers)
     {
         List<com.itelg.docker.cawandu.domain.container.Container> containers = new ArrayList<>();
-        
+
         for (Container clientContainer : clientContainers)
         {
             containers.add(convert(clientContainer));
         }
-        
+
         return containers;
     }
 }

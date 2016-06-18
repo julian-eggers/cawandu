@@ -23,7 +23,7 @@ public class RegistryImageTagListParser implements Converter<String, List<String
         {
             tags.add(jsonArray.getString(i));
         }
-        
+
         Collections.sort(tags);
         Collections.reverse(tags);
         return tags;

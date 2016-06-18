@@ -38,12 +38,12 @@ public class ImageListComposer extends TabComposer
 {
     private static final long serialVersionUID = -5360705760494227016L;
     private transient @Autowired ImageService imageService;
-    
+
     private @Wire Listbox imageListbox;
     private @Wire Textbox nameTextbox;
     private @Wire Textbox idTextbox;
     private @WireArg("filter") ImageFilter filter;
-    
+
     @Override
     protected void afterCompose()
     {
@@ -52,24 +52,24 @@ public class ImageListComposer extends TabComposer
         refreshListbox();
         setTitle(buildTitle());
     }
-    
+
     private void initFilter()
     {
         nameTextbox.setValue(filter.getName());
         idTextbox.setValue(filter.getId());
     }
-    
+
     private void initListbox()
     {
         imageListbox.setItemRenderer(new ImageListitemRenderer());
     }
-    
+
     private void refreshListbox()
     {
         imageListbox.setModel(new ListModelList<>(imageService.getImagesByFilter(filter)));
         ListboxHelper.hideIfEmpty(imageListbox, "No images found");
     }
-    
+
     private String buildTitle()
     {
         String title = "Images";
@@ -79,7 +79,7 @@ public class ImageListComposer extends TabComposer
         {
             filterProperties.add("Name: " + filter.getName());
         }
-        
+
         if (StringUtils.isNotBlank(filter.getId()))
         {
             filterProperties.add("ID: " + filter.getId());
@@ -92,7 +92,7 @@ public class ImageListComposer extends TabComposer
 
         return title;
     }
-    
+
     private class ImageListitemRenderer implements ListitemRenderer<Image>
     {
         @Override
@@ -103,7 +103,7 @@ public class ImageListComposer extends TabComposer
             item.setContext(popup);
             item.setPopup(popup);
             item.setValue(image);
-            
+
             Menuitem showContainersMenuitem = new Menuitem("Show containers");
             showContainersMenuitem.setParent(popup);
             showContainersMenuitem.setIconSclass("z-icon-th-large");
@@ -113,7 +113,7 @@ public class ImageListComposer extends TabComposer
                 filter.setImageName(image.getName());
                 ContainerListComposer.show(filter);
             });
-            
+
             Menuitem pullImageMenuitem = new Menuitem("Pull image");
             pullImageMenuitem.setParent(popup);
             pullImageMenuitem.setIconSclass("z-icon-download");
@@ -121,14 +121,14 @@ public class ImageListComposer extends TabComposer
             pullImageMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 UpdateState state = imageService.pullImage(image);
-                
+
                 if (state == UpdateState.PULLED)
                 {
                     showNotification("New version pulled");
                     refreshListbox();
                     publish(new ImagePulledEvent(image));
                 }
-                else if (state == UpdateState.NO_UPDATE) 
+                else if (state == UpdateState.NO_UPDATE)
                 {
                     showNotification("No update available");
                 }
@@ -136,12 +136,12 @@ public class ImageListComposer extends TabComposer
                 {
                     showWarning("No access to private repository!");
                 }
-                else 
+                else
                 {
                     showWarning("Unknown error");
                 }
             });
-            
+
             Menuitem removeImageMenuitem = new Menuitem("Remove image");
             removeImageMenuitem.setParent(popup);
             removeImageMenuitem.setIconSclass("z-icon-times");
@@ -157,14 +157,14 @@ public class ImageListComposer extends TabComposer
                     showWarning("Failed to delete image");
                 }
             });
-            
+
             new Listcell(image.getId()).setParent(item);
             new Listcell(image.getName()).setParent(item);
             new Listcell(image.getSize() + " MB").setParent(item);
             ListcellHelper.buildDateTimeListcell(image.getCreated()).setParent(item);
         }
     }
-    
+
     @Listen("onClick = #searchSubmitButton")
     public void onExecuteFilter()
     {
@@ -182,7 +182,7 @@ public class ImageListComposer extends TabComposer
         idTextbox.setValue("");
         onExecuteFilter();
     }
-    
+
     @Listen("onClick = #removeUnusedImages")
     public void onRemoveUnusedImages()
     {
@@ -190,13 +190,13 @@ public class ImageListComposer extends TabComposer
         showNotification(removedImages.size() + " images removed");
         refreshListbox();
     }
-    
+
     public static void show()
     {
         show(new ImageFilter());
     }
-    
-    public static void show (ImageFilter filter)
+
+    public static void show(ImageFilter filter)
     {
         show("/image/list.zul", Collections.singletonMap("filter", filter));
     }

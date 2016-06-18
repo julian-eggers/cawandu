@@ -26,10 +26,10 @@ public class ContainerSwitchTagComposer extends PopupComposer
     private static final long serialVersionUID = 1147421985315347809L;
     private transient @Autowired ContainerService containerService;
     private transient @Autowired RegistryService registryService;
-    
+
     private @Wire Combobox tagsCombobox;
     private @WireArg("container") Container container;
-    
+
     @Override
     protected void afterCompose()
     {
@@ -44,25 +44,25 @@ public class ContainerSwitchTagComposer extends PopupComposer
                 {
                     item.setDisabled(true);
                 }
-                
+
                 item.setValue(tag);
                 item.setLabel(tag);
             }
         });
     }
-    
+
     @Listen("onClick = #switchTagButton")
     public void onSwitchTag()
     {
         String tag = tagsCombobox.getSelectedItem().getValue();
-        
+
         if (!container.getImageTag().equals(tag))
         {
             containerService.switchTag(container, tag);
-            close(container);            
+            close(container);
         }
     }
-    
+
     public static org.zkoss.zk.ui.Component show(Container container)
     {
         return show("/container/switchtag.zul", Collections.singletonMap("container", container));

@@ -21,10 +21,10 @@ import com.spotify.docker.client.DockerClient.ListImagesFilterParam;
 public class DockerImageRepository implements ImageRepository
 {
     private static final Logger log = LoggerFactory.getLogger(DockerImageRepository.class);
-    
+
     @Autowired
     private DockerClient dockerClient;
-    
+
     @Autowired
     private ImageConverter imageConverter;
 
@@ -33,7 +33,7 @@ public class DockerImageRepository implements ImageRepository
     {
         return pullImage(image.getName());
     }
-    
+
     @Override
     public UpdateState pullImage(String imageName)
     {
@@ -47,10 +47,10 @@ public class DockerImageRepository implements ImageRepository
         {
             log.error(e.getMessage(), e);
         }
-        
+
         return UpdateState.UNKNOWN_ERROR;
     }
-    
+
     @Override
     public boolean removeImage(Image image)
     {
@@ -62,16 +62,16 @@ public class DockerImageRepository implements ImageRepository
         {
             log.error(e.getMessage(), e);
         }
-        
+
         return false;
     }
-    
+
     @Override
     public List<Image> getImagesByFilter(ImageFilter filter)
     {
         List<Image> allImages = getAllImages();
         List<Image> filteredImages = new ArrayList<>(allImages);
-        
+
         for (Image image : allImages)
         {
             if (StringUtils.isNotBlank(filter.getId()))
@@ -81,7 +81,7 @@ public class DockerImageRepository implements ImageRepository
                     filteredImages.remove(image);
                 }
             }
-            
+
             if (StringUtils.isNotBlank(filter.getName()))
             {
                 if (!image.getName().contains(filter.getName()))
@@ -90,10 +90,10 @@ public class DockerImageRepository implements ImageRepository
                 }
             }
         }
-        
+
         return filteredImages;
     }
-    
+
     @Override
     public List<Image> getAllImages()
     {
@@ -105,7 +105,7 @@ public class DockerImageRepository implements ImageRepository
         {
             log.error(e.getMessage(), e);
         }
-        
+
         return null;
     }
 }

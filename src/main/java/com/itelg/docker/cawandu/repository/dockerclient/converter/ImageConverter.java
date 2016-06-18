@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.spotify.docker.client.messages.Image;
 
-
 @Component
 public class ImageConverter implements Converter<Image, com.itelg.docker.cawandu.domain.image.Image>
 {
@@ -24,16 +23,16 @@ public class ImageConverter implements Converter<Image, com.itelg.docker.cawandu
         image.setCreated(LocalDateTime.ofEpochSecond(Long.parseLong(clientImage.created()), 0, ZoneOffset.UTC));
         return image;
     }
-    
+
     public List<com.itelg.docker.cawandu.domain.image.Image> convert(List<Image> clientImages)
     {
         List<com.itelg.docker.cawandu.domain.image.Image> images = new ArrayList<>();
-        
+
         for (Image image : clientImages)
         {
             images.add(convert(image));
         }
-        
+
         return images;
     }
 }

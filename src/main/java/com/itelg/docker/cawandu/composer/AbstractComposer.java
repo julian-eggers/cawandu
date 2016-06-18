@@ -23,107 +23,107 @@ import de.jaggl.utils.events.zk.ZKEventQueue;
 
 public abstract class AbstractComposer<T extends Component> extends SelectorComposer<T>
 {
-	private static final long serialVersionUID = 6674424476041331852L;
-	protected static final String QUEUE_NAME = "DEFAULT_EVENT_QUEUE";
+    private static final long serialVersionUID = 6674424476041331852L;
+    protected static final String QUEUE_NAME = "DEFAULT_EVENT_QUEUE";
 
-	@Override
-	public ComponentInfo doBeforeCompose(Page page, Component parent, ComponentInfo compInfo)
-	{
-		ReflectionUtils.doWithFields(getClass(), new FieldCallback()
-		{
-			@Override
-			public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException
-			{
-				WireArg wireArg = field.getAnnotation(WireArg.class);
+    @Override
+    public ComponentInfo doBeforeCompose(Page page, Component parent, ComponentInfo compInfo)
+    {
+        ReflectionUtils.doWithFields(getClass(), new FieldCallback()
+        {
+            @Override
+            public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException
+            {
+                WireArg wireArg = field.getAnnotation(WireArg.class);
 
-				if (wireArg != null)
-				{
-					Object arg = Executions.getCurrent().getArg().get(wireArg.value());
+                if (wireArg != null)
+                {
+                    Object arg = Executions.getCurrent().getArg().get(wireArg.value());
 
-					if (arg != null && ClassUtils.primitiveToWrapper(field.getType()).isAssignableFrom(arg.getClass()))
-					{
-						field.setAccessible(true);
-						field.set(AbstractComposer.this, arg);
-					}
-				}
-			}
-		});
+                    if (arg != null && ClassUtils.primitiveToWrapper(field.getType()).isAssignableFrom(arg.getClass()))
+                    {
+                        field.setAccessible(true);
+                        field.set(AbstractComposer.this, arg);
+                    }
+                }
+            }
+        });
 
-		return super.doBeforeCompose(page, parent, compInfo);
-	}
+        return super.doBeforeCompose(page, parent, compInfo);
+    }
 
-	@Override
-	public void doAfterCompose(final T comp) throws Exception
-	{
-		super.doAfterCompose(comp);
-		ZKEventQueue.subscribe(QUEUE_NAME, this);
-	}
+    @Override
+    public void doAfterCompose(final T comp) throws Exception
+    {
+        super.doAfterCompose(comp);
+        ZKEventQueue.subscribe(QUEUE_NAME, this);
+    }
 
-	public void publish(Event event)
-	{
-		ZKEventQueue.publish(QUEUE_NAME, event);
-	}
-	
-	// Create new windows
-	protected static Component show(String uri, Position position, Map<String, Object> args, Component parent)
-	{
-		Map<String, Object> data = new HashMap<String, Object>();
+    public void publish(Event event)
+    {
+        ZKEventQueue.publish(QUEUE_NAME, event);
+    }
 
-		if (args != null)
-		{
-			data.putAll(args);
-		}
+    // Create new windows
+    protected static Component show(String uri, Position position, Map<String, Object> args, Component parent)
+    {
+        Map<String, Object> data = new HashMap<String, Object>();
 
-		data.put("left", position != null ? position.getLeft() : null);
-		data.put("top", position != null ? position.getTop() : null);
-		data.put("position", position == null ? "center" : null);
+        if (args != null)
+        {
+            data.putAll(args);
+        }
 
-		return Executions.createComponents(uri, parent, data);
-	}
+        data.put("left", position != null ? position.getLeft() : null);
+        data.put("top", position != null ? position.getTop() : null);
+        data.put("position", position == null ? "center" : null);
 
-	protected static Component show(String uri, Map<String, Object> args, Component parent)
-	{
-		return show(uri, null, args, parent);
-	}
+        return Executions.createComponents(uri, parent, data);
+    }
 
-	protected static Component show(String uri, Position position, Map<String, Object> args)
-	{
-		return show(uri, position, args, null);
-	}
+    protected static Component show(String uri, Map<String, Object> args, Component parent)
+    {
+        return show(uri, null, args, parent);
+    }
 
-	protected static Component show(String uri, Map<String, Object> args)
-	{
-		return show(uri, null, args, null);
-	}
+    protected static Component show(String uri, Position position, Map<String, Object> args)
+    {
+        return show(uri, position, args, null);
+    }
 
-	protected static Component show(String uri)
-	{
-		return show(uri, null, null, null);
-	}
+    protected static Component show(String uri, Map<String, Object> args)
+    {
+        return show(uri, null, args, null);
+    }
 
-	protected static Component show(String uri, Position position)
-	{
-		return show(uri, position, null, null);
-	}
-	
-	// Notifications & alerts
-	public void showNotification(String message)
-	{
-		Clients.showNotification(message, "info", null, "bottom_right", 2000, true);
-	}
+    protected static Component show(String uri)
+    {
+        return show(uri, null, null, null);
+    }
 
-	public void showInfo(String message)
-	{
-		Messagebox.show(message);
-	}
+    protected static Component show(String uri, Position position)
+    {
+        return show(uri, position, null, null);
+    }
 
-	public void showWarning(String message)
-	{
-		Messagebox.show(message, "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
-	}
+    // Notifications & alerts
+    public void showNotification(String message)
+    {
+        Clients.showNotification(message, "info", null, "bottom_right", 2000, true);
+    }
 
-	public void showError(String message)
-	{
-		Messagebox.show(message, "Error", Messagebox.OK, Messagebox.ERROR);
-	}
+    public void showInfo(String message)
+    {
+        Messagebox.show(message);
+    }
+
+    public void showWarning(String message)
+    {
+        Messagebox.show(message, "Warning", Messagebox.OK, Messagebox.EXCLAMATION);
+    }
+
+    public void showError(String message)
+    {
+        Messagebox.show(message, "Error", Messagebox.OK, Messagebox.ERROR);
+    }
 }

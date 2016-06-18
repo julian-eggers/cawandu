@@ -9,11 +9,14 @@ import com.itelg.docker.cawandu.domain.image.UpdateState;
 public interface ImageService
 {
     UpdateState pullImage(Image image);
+
     UpdateState pullImage(String imageName);
-    
+
     boolean removeImage(Image image);
+
     List<Image> removedUnusedImages();
-    
+
     List<Image> getImagesByFilter(ImageFilter filter);
+
     List<Image> getAllImages();
 }

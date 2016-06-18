@@ -5,22 +5,22 @@ import org.zkoss.zul.Window;
 
 public class TabCreatedEvent extends Event
 {
-	private static final long serialVersionUID = -4042638927767041356L;
-	private String tabId;
-	
-	public TabCreatedEvent(String tabId, Window window)
-	{
-		super(TabCreatedEvent.class.getName(), null, window);
-		this.tabId = tabId;
-	}
+    private static final long serialVersionUID = -4042638927767041356L;
+    private String tabId;
 
-	public Window getWindow()
-	{
-		return (Window) getData();
-	}
-	
-	public String getTabId()
-	{
-		return tabId;
-	}
+    public TabCreatedEvent(String tabId, Window window)
+    {
+        super(TabCreatedEvent.class.getName(), null, window);
+        this.tabId = tabId;
+    }
+
+    public Window getWindow()
+    {
+        return (Window) getData();
+    }
+
+    public String getTabId()
+    {
+        return tabId;
+    }
 }

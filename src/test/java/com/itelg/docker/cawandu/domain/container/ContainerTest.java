@@ -14,7 +14,7 @@ public class ContainerTest
         container.setImageName("jeggers/test:latest");
         Assert.assertEquals("jeggers/test:latest", container.getImageName());
     }
-    
+
     @Test
     public void testGetImageNameByLabel()
     {
@@ -23,7 +23,7 @@ public class ContainerTest
         container.setLabels(Collections.singletonMap("cawandu.image.name", "jeggers/test123:latest"));
         Assert.assertEquals("jeggers/test123:latest", container.getImageName());
     }
-    
+
     @Test
     public void testGetImageTag()
     {
@@ -31,7 +31,7 @@ public class ContainerTest
         container.setImageName("jeggers/test:current");
         Assert.assertEquals("current", container.getImageTag());
     }
-    
+
     @Test
     public void testGetImageTagWithoutTag()
     {
@@ -39,14 +39,14 @@ public class ContainerTest
         container.setImageName("jeggers/test");
         Assert.assertEquals("latest", container.getImageTag());
     }
-    
+
     @Test
     public void testGetImageTagEmpty()
     {
         Container container = new Container();
         Assert.assertNull(container.getImageTag());
     }
-    
+
     @Test
     public void testGetImageNameWithoutTag()
     {
@@ -54,7 +54,7 @@ public class ContainerTest
         container.setImageName("jeggers/test:current");
         Assert.assertEquals("jeggers/test", container.getImageNameWithoutTag());
     }
-    
+
     @Test
     public void testGetImageNameWithoutTagWithoutTag()
     {
@@ -62,14 +62,14 @@ public class ContainerTest
         container.setImageName("jeggers/test");
         Assert.assertEquals("jeggers/test", container.getImageNameWithoutTag());
     }
-    
+
     @Test
     public void testGetImageNameWithoutTagMissing()
     {
         Container container = new Container();
         Assert.assertNull(container.getImageNameWithoutTag());
     }
-    
+
     @Test
     public void testHasLabel()
     {
@@ -79,7 +79,7 @@ public class ContainerTest
         Assert.assertTrue(container.hasLabel("key"));
         Assert.assertFalse(container.hasLabel("notfound"));
     }
-    
+
     @Test
     public void testGetLabel()
     {
@@ -88,7 +88,7 @@ public class ContainerTest
         container.setLabels(Collections.singletonMap("key", "value"));
         Assert.assertEquals("value", container.getLabel("key"));
     }
-    
+
     @Test
     public void testAddLabel()
     {
@@ -99,7 +99,7 @@ public class ContainerTest
         Assert.assertNotNull(container.getLabels());
         Assert.assertEquals(1, container.getLabels().size());
     }
-    
+
     @Test
     public void testToString()
     {
