@@ -19,7 +19,7 @@ public class ImagePullTask
 {
     private static final Logger log = LoggerFactory.getLogger(ImagePullTask.class);
 
-    @Value("${docker.pullMode}")
+    @Value("${docker.pullMode:RUNNING}")
     private PullMode pullMode;
 
     @Autowired
