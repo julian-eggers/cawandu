@@ -1,17 +1,14 @@
 package com.itelg.docker.cawandu.domain.filter;
 
+import lombok.Data;
+
+@Data
 public abstract class AbstractFilter implements Filter
 {
     private String orderBy;
     private Boolean ascending;
     private Integer page;
     private Integer pageSize;
-
-    @Override
-    public String getOrderBy()
-    {
-        return orderBy;
-    }
 
     @Override
     public Boolean isAscending()
@@ -24,28 +21,6 @@ public abstract class AbstractFilter implements Filter
     {
         this.orderBy = orderBy;
         this.ascending = Boolean.valueOf(ascending);
-    }
-
-    @Override
-    public Integer getPage()
-    {
-        return page;
-    }
-
-    private void setPage(Integer page)
-    {
-        this.page = page;
-    }
-
-    @Override
-    public Integer getPageSize()
-    {
-        return pageSize;
-    }
-
-    private void setPageSize(Integer pageSize)
-    {
-        this.pageSize = pageSize;
     }
 
     @Override

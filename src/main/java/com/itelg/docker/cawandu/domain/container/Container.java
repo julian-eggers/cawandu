@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import lombok.Data;
+
+@Data
 public class Container
 {
     public static final String CONTAINER_NAME_PATTERN = "/?[a-zA-Z0-9_-]+";
@@ -18,36 +21,6 @@ public class Container
     private String imageId;
     private Map<String, String> labels;
     private LocalDateTime created;
-
-    public String getId()
-    {
-        return id;
-    }
-
-    public void setId(String id)
-    {
-        this.id = id;
-    }
-
-    public ContainerState getState()
-    {
-        return state;
-    }
-
-    public void setState(ContainerState state)
-    {
-        this.state = state;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
 
     public String getImageName()
     {
@@ -89,24 +62,9 @@ public class Container
         return null;
     }
 
-    public String getImageId()
+    public boolean hasPullableImageTag()
     {
-        return imageId;
-    }
-
-    public void setImageId(String imageId)
-    {
-        this.imageId = imageId;
-    }
-
-    public Map<String, String> getLabels()
-    {
-        return labels;
-    }
-
-    public void setLabels(Map<String, String> labels)
-    {
-        this.labels = labels;
+        return false;
     }
 
     public boolean hasLabel(String key)
@@ -139,16 +97,6 @@ public class Container
         labels.put(key, value);
     }
 
-    public LocalDateTime getCreated()
-    {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created)
-    {
-        this.created = created;
-    }
-
     public boolean isStartable()
     {
         return (state == ContainerState.CREATED || state == ContainerState.EXITED);
@@ -177,11 +125,5 @@ public class Container
     public boolean hasUpdate()
     {
         return imageId.equals(imageName);
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Container [id=" + id + ", state=" + state + ", name=" + name + ", imageName=" + imageName + ", imageId=" + imageId + ", labels=" + labels + ", created=" + created + "]";
     }
 }
