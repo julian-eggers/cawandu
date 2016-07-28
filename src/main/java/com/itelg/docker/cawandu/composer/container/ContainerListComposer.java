@@ -201,7 +201,7 @@ public class ContainerListComposer extends TabComposer
             Menuitem switchTagMenuitem = new Menuitem("Switch tag");
             switchTagMenuitem.setParent(popup);
             switchTagMenuitem.setIconSclass("z-icon-sort");
-            switchTagMenuitem.setDisabled(container.getImageName() == null);
+            switchTagMenuitem.setDisabled(!container.isTagSwitchable());
             switchTagMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 org.zkoss.zk.ui.Component composer = ContainerSwitchTagComposer.show(container);

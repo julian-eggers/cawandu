@@ -32,11 +32,6 @@ public class Container
         return imageName;
     }
 
-    public void setImageName(String imageName)
-    {
-        this.imageName = imageName;
-    }
-
     public String getImageTag()
     {
         if (StringUtils.isNotBlank(getImageName()))
@@ -60,11 +55,6 @@ public class Container
         }
 
         return null;
-    }
-
-    public boolean hasPullableImageTag()
-    {
-        return false;
     }
 
     public boolean hasLabel(String key)
@@ -124,6 +114,11 @@ public class Container
 
     public boolean hasUpdate()
     {
-        return imageId.equals(imageName);
+        return (imageId.equals(imageName) && !getImageName().contains("sha256"));
+    }
+
+    public boolean isTagSwitchable()
+    {
+        return !getImageName().contains("sha256");
     }
 }

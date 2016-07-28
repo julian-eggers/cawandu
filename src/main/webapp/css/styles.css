@@ -1,18 +1,75 @@
-/* Required for iconSclass of menuitems */
-.z-menu-content i:not(.z-menu-icon),
-.z-menuitem-content i:not(.z-menu-icon) {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
-    margin-right: 9px;
+@CHARSET "ISO-8859-1";
+
+
+
+.z-toolbar {
+
+	margin-top: -4px;
+
+	margin-left: -4px;
+
+	margin-right: -4px;
+
+	margin-bottom: 4px;
+
 }
+
+
+
+.z-caption-content {
+
+	font-weight: bold;
+
+}
+
+
+
+.z-window-header {
+
+	padding-left: 8px;
+
+	font-weight: bold;
+
+}
+
+
+
+.z-listbox-emptybody tr td {
+
+	padding: 8px;
+
+}
+
+
+
+.z-menu-content i:not(.z-menu-icon),
+
+.z-menuitem-content i:not(.z-menu-icon) {
+
+    display: inline-block;
+
+    width: 16px;
+
+    height: 16px;
+
+    line-height: 16px;
+
+    text-align: center;
+
+}
+
+
 
 .z-menu-content i:not(.z-menu-icon) {
+
 	margin-right: 2px;
+
 }
 
+
+
 .z-menuitem-content i:not(.z-menu-icon) {
+
 	margin-right: 9px;
+
 }
