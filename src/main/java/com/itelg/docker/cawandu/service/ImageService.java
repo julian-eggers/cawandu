@@ -18,5 +18,7 @@ public interface ImageService
 
     List<Image> getImagesByFilter(ImageFilter filter);
 
+    List<Image> getUsedImages();
+
     List<Image> getAllImages();
 }

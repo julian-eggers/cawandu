@@ -7,7 +7,7 @@
       <label value="State: " style="font-weight: bold;" />
       <combobox id="stateCombobox" />
       <space width="30px" />
-      <label value="Name: " style="font-weight: bold;"/>
+      <label value="Name: " style="font-weight: bold;" />
       <textbox id="nameTextbox" />
       <space width="30px" />
       <label value="ID: " style="font-weight: bold;" />

@@ -62,6 +62,7 @@ public class ImageListComposer extends TabComposer
     private void initListbox()
     {
         imageListbox.setItemRenderer(new ImageListitemRenderer());
+        imageListbox.getPaginal().setAutohide(false);
     }
 
     private void refreshListbox()
