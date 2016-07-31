@@ -84,14 +84,14 @@ public class DockerImageRepository implements ImageRepository
 
             if (StringUtils.isNotBlank(filter.getName()))
             {
-                if (!image.getName().contains(filter.getName()))
+                if (image.getName() == null || !image.getName().contains(filter.getName()))
                 {
                     filteredImages.remove(image);
                 }
             }
         }
 
-        return filteredImages;
+        return new ArrayList<>(filteredImages);
     }
 
     @Override

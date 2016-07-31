@@ -22,8 +22,9 @@ public class ContainerConverter implements Converter<Container, com.itelg.docker
         container.setId(clientContainer.id());
         container.setState(ContainerState.fromString(clientContainer.status()));
         container.setName(clientContainer.names().get(0).substring(1, clientContainer.names().get(0).length()));
-        container.setImageName(clientContainer.image());
+        container.setImageName(!clientContainer.image().equals(clientContainer.imageId()) ? clientContainer.image() : null);
         container.setImageId(clientContainer.imageId());
+        container.setUpdate(clientContainer.image().equals(clientContainer.imageId()));
         container.setLabels(new HashMap<>(clientContainer.labels()));
         container.setCreated(LocalDateTime.ofEpochSecond(clientContainer.created().longValue(), 0, ZoneOffset.UTC));
         return container;

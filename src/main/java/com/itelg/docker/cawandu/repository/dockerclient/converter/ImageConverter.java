@@ -18,7 +18,7 @@ public class ImageConverter implements Converter<Image, com.itelg.docker.cawandu
     {
         com.itelg.docker.cawandu.domain.image.Image image = new com.itelg.docker.cawandu.domain.image.Image();
         image.setId(clientImage.id());
-        image.setName(clientImage.repoTags().get(0));
+        image.setName(getImageName(clientImage));
         image.setSize(clientImage.size().longValue() / 1000 / 1000);
         image.setCreated(LocalDateTime.ofEpochSecond(Long.parseLong(clientImage.created()), 0, ZoneOffset.UTC));
         return image;
@@ -34,5 +34,20 @@ public class ImageConverter implements Converter<Image, com.itelg.docker.cawandu
         }
 
         return images;
+    }
+
+    private String getImageName(Image clientImage)
+    {
+        if (clientImage.repoTags() != null)
+        {
+            String imageName = clientImage.repoTags().get(0);
+
+            if (!"<none>:<none>".equals(imageName))
+            {
+                return imageName;
+            }
+        }
+
+        return null;
     }
 }

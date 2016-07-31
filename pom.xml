@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.18-RELEASE</version>
+  <version>0.2.19-RELEASE</version>
 
   <properties>
     <!-- System -->
@@ -27,7 +27,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.3.7.RELEASE</version>
+    <version>1.4.0.RELEASE</version>
   </parent>
 
   <scm>
@@ -120,7 +120,7 @@
             <MAX_HEAP>200M</MAX_HEAP>
             <JAVA_OPTS>-Dfoo=bar</JAVA_OPTS>
           </env>
-          <cmd>["/bin/sh", "-c", "java -Ddocker.registry.username=${REGISTRY_USERNAME} -Ddocker.registry.email=${REGISTRY_EMAIL} -Ddocker.registry.password=${REGISTRY_PASSWORD} -Ddocker.host.uri=${HOST_URI} -Ddocker.host.certificates.directory=${HOST_CERTIFICATES} -Ddocker.pullMode=${PULL_MODE} -Dserver.port=${HTTP_PORT} -Dfile.encoding=UTF-8 -Xmx${MAX_HEAP} ${JAVA_OPTS} -jar /${project.build.finalName}.${project.packaging}"]</cmd>
+          <cmd>["/bin/sh", "-c", "java -Ddocker.registry.username=${REGISTRY_USERNAME} -Ddocker.registry.email=${REGISTRY_EMAIL} -Ddocker.registry.password=${REGISTRY_PASSWORD} -Ddocker.host.uri=${HOST_URI} -Ddocker.host.certificates.directory=${HOST_CERTIFICATES} -Dtask.pullImages.pullMode=${PULL_MODE} -Dserver.port=${HTTP_PORT} -Dfile.encoding=UTF-8 -Xmx${MAX_HEAP} ${JAVA_OPTS} -jar /${project.build.finalName}.${project.packaging}"]</cmd>
           <resources>
             <resource>
               <targetPath>/</targetPath>
@@ -270,7 +270,6 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.8</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

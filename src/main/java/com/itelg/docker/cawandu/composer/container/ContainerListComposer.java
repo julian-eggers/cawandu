@@ -77,6 +77,7 @@ public class ContainerListComposer extends TabComposer
     private void initListbox()
     {
         containerListbox.setItemRenderer(new ContainerListitemRenderer());
+        containerListbox.getPaginal().setAutohide(false);
     }
 
     @Processing(ImagePulledEvent.class)
@@ -253,7 +254,12 @@ public class ContainerListComposer extends TabComposer
             Listcell imageNameListcell = new Listcell(container.getImageName());
             imageNameListcell.setParent(item);
 
-            if (container.hasUpdate())
+            if (StringUtils.isBlank(container.getImageName()))
+            {
+                imageNameListcell.setStyle("background-color: red;");
+                imageNameListcell.setLabel("Unknown (Image-ID: " + container.getImageId() + ")");
+            }
+            else if (container.hasUpdate())
             {
                 imageNameListcell.setStyle("background-color: orange;");
                 imageNameListcell.setTooltiptext("Update available");

@@ -3,8 +3,10 @@ package com.itelg.docker.cawandu.domain.image;
 import java.time.LocalDateTime;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(of = "id")
 public class Image
 {
     private String id;
@@ -14,6 +16,6 @@ public class Image
 
     public boolean isPullable()
     {
-        return !"<none>:<none>".equals(name);
+        return (name != null);
     }
 }

@@ -7,8 +7,10 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(of = "id")
 public class Container
 {
     public static final String CONTAINER_NAME_PATTERN = "/?[a-zA-Z0-9_-]+";
@@ -16,6 +18,7 @@ public class Container
 
     private String id;
     private ContainerState state;
+    private boolean update;
     private String name;
     private String imageName;
     private String imageId;
@@ -114,11 +117,11 @@ public class Container
 
     public boolean hasUpdate()
     {
-        return (imageId.equals(imageName) && !getImageName().contains("sha256"));
+        return (update && getImageName() != null);
     }
 
     public boolean isTagSwitchable()
     {
-        return !getImageName().contains("sha256");
+        return (getImageName() != null);
     }
 }
