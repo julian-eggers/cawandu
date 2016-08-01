@@ -101,8 +101,170 @@ public class ContainerTest
     }
 
     @Test
-    public void testToString()
+    public void testIsStartableStatusCreated()
     {
-        Assert.assertTrue(new Container().toString().startsWith("Container"));
+        Container container = new Container();
+        container.setState(ContainerState.CREATED);
+        Assert.assertTrue(container.isStartable());
+    }
+
+    @Test
+    public void testIsStartableStatusExited()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.EXITED);
+        Assert.assertTrue(container.isStartable());
+    }
+
+    @Test
+    public void testIsStartableNot()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.PAUSED);
+        Assert.assertFalse(container.isStartable());
+    }
+
+    @Test
+    public void testIsStoppableStatusUp()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.UP);
+        Assert.assertTrue(container.isStoppable());
+    }
+
+    @Test
+    public void testIsStoppableStatusRestarting()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.RESTARTING);
+        Assert.assertTrue(container.isStoppable());
+    }
+
+    @Test
+    public void testIsStoppableNot()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.PAUSED);
+        Assert.assertFalse(container.isStoppable());
+    }
+
+    @Test
+    public void testIsRestartableStatusRestartable()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.UP);
+        Assert.assertTrue(container.isRestartable());
+    }
+
+    @Test
+    public void testIsRestartableNot()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.PAUSED);
+        Assert.assertFalse(container.isRestartable());
+    }
+
+    @Test
+    public void testIsRemovableStatusCreated()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.CREATED);
+        Assert.assertTrue(container.isRemovable());
+    }
+
+    @Test
+    public void testIsRemovableStatusExited()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.EXITED);
+        Assert.assertTrue(container.isRemovable());
+    }
+
+    @Test
+    public void testIsRemovableNot()
+    {
+        Container container = new Container();
+        container.setState(ContainerState.PAUSED);
+        Assert.assertFalse(container.isRemovable());
+    }
+
+    @Test
+    public void testIsKillableNot()
+    {
+        Container container = new Container();
+        Assert.assertTrue(container.isKillable());
+    }
+
+    @Test
+    public void testHasUpdateNoUpdateAndNoImage()
+    {
+        Container container = new Container();
+        container.setUpdate(false);
+        container.setImageName(null);
+        Assert.assertFalse(container.hasUpdate());
+    }
+
+    @Test
+    public void testHasUpdateUpdateAndNoImage()
+    {
+        Container container = new Container();
+        container.setUpdate(true);
+        container.setImageName(null);
+        Assert.assertFalse(container.hasUpdate());
+    }
+
+    @Test
+    public void testHasUpdateNoUpdateAndImage()
+    {
+        Container container = new Container();
+        container.setUpdate(false);
+        container.setImageName("cawandu");
+        Assert.assertFalse(container.hasUpdate());
+    }
+
+    @Test
+    public void testHasUpdateUpdateAndImage()
+    {
+        Container container = new Container();
+        container.setUpdate(true);
+        container.setImageName("cawandu");
+        Assert.assertTrue(container.hasUpdate());
+    }
+
+    @Test
+    public void testIsTagSwitchableNoImage()
+    {
+        Container container = new Container();
+        container.setImageName(null);
+        Assert.assertFalse(container.isTagSwitchable());
+    }
+
+    @Test
+    public void testIsTagSwitchable()
+    {
+        Container container = new Container();
+        container.setImageName("cawandu");
+        Assert.assertTrue(container.isTagSwitchable());
+    }
+
+    @Test
+    public void testEquals()
+    {
+        Container container1 = new Container();
+        container1.setId("1");
+        container1.setName("1");
+
+        Container container2 = new Container();
+        container2.setId("2");
+        container2.setName("2");
+
+        Container container3 = new Container();
+        container3.setId("1");
+        container3.setName("3");
+
+        Assert.assertEquals(container1, container1);
+        Assert.assertNotEquals(container1, container2);
+        Assert.assertEquals(container1, container3);
+        Assert.assertNotEquals(container2, container3);
     }
 }
