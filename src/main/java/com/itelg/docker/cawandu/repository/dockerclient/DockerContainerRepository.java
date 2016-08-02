@@ -216,7 +216,7 @@ public class DockerContainerRepository implements ContainerRepository
 
             if (StringUtils.isNotBlank(filter.getImageName()))
             {
-                if (!container.getImageName().contains(filter.getImageName()))
+                if (container.getImageName() == null || !container.getImageName().contains(filter.getImageName()))
                 {
                     filteredContainers.remove(container);
                 }

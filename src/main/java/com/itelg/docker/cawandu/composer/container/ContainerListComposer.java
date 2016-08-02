@@ -256,13 +256,18 @@ public class ContainerListComposer extends TabComposer
 
             if (StringUtils.isBlank(container.getImageName()))
             {
-                imageNameListcell.setStyle("background-color: red;");
+                imageNameListcell.setStyle("color: red;");
                 imageNameListcell.setLabel("Unknown (Image-ID: " + container.getImageId() + ")");
+                imageNameListcell.setTooltiptext("Wrong config! Add image-label or tag image");
             }
             else if (container.hasUpdate())
             {
-                imageNameListcell.setStyle("background-color: orange;");
+                imageNameListcell.setStyle("color: #00CC00;");
                 imageNameListcell.setTooltiptext("Update available");
+            }
+            else
+            {
+                imageNameListcell.setTooltiptext("No update available");
             }
 
             ListcellHelper.buildDateTimeListcell(container.getCreated()).setParent(item);
