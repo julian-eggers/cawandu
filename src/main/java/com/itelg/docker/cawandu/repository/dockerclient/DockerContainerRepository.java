@@ -1,11 +1,11 @@
 package com.itelg.docker.cawandu.repository.dockerclient;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,11 +19,12 @@ import com.spotify.docker.client.DockerClient.ListContainersParam;
 import com.spotify.docker.client.messages.ContainerConfig;
 import com.spotify.docker.client.messages.ContainerInfo;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Repository
+@Slf4j
 public class DockerContainerRepository implements ContainerRepository
 {
-    private static final Logger log = LoggerFactory.getLogger(DockerContainerRepository.class);
-
     @Autowired
     private DockerClient dockerClient;
 
@@ -239,5 +240,24 @@ public class DockerContainerRepository implements ContainerRepository
         }
 
         return null;
+    }
+
+    @Override
+    public Map<ContainerState, Integer> getContainerStateStats()
+    {
+        Map<ContainerState, Integer> stats = new LinkedHashMap<>();
+
+        for (ContainerState state : ContainerState.values())
+        {
+            stats.put(state, Integer.valueOf(0));
+        }
+
+        for (Container container : getAllContainers())
+        {
+            int count = (stats.get(container.getState()).intValue() + 1);
+            stats.put(container.getState(), Integer.valueOf(count));
+        }
+
+        return stats;
     }
 }

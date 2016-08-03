@@ -117,6 +117,7 @@ public class HttpRegistryRepository implements RegistryRepository
     @Override
     public List<String> getImageTagsByName(String imageName)
     {
+        imageName = (imageName.contains("/") ? imageName : "library/" + imageName);
         String url = registryIndexUrl + imageName + "/tags/list";
         HttpEntity entity = null;
 

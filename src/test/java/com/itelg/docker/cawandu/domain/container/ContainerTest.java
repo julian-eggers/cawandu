@@ -25,6 +25,21 @@ public class ContainerTest
     }
 
     @Test
+    public void testIsImagePullableNoImageName()
+    {
+        Container container = new Container();
+        Assert.assertFalse(container.isImagePullable());
+    }
+
+    @Test
+    public void testIsImagePullable()
+    {
+        Container container = new Container();
+        container.setImageName("jeggers/cawandu:latest");
+        Assert.assertTrue(container.isImagePullable());
+    }
+
+    @Test
     public void testGetImageTag()
     {
         Container container = new Container();

@@ -15,6 +15,7 @@ import org.powermock.reflect.Whitebox;
 
 import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
+import com.itelg.docker.cawandu.domain.container.ContainerState;
 import com.itelg.docker.cawandu.domain.image.UpdateState;
 import com.itelg.docker.cawandu.repository.ContainerRepository;
 import com.itelg.docker.cawandu.service.ContainerService;
@@ -63,6 +64,19 @@ public class DefaultContainerServiceTest
         PowerMock.replayAll();
         Container container = new Container();
         container.setImageName("jeggers/cawandu:latest");
+        containerService.recreateContainer(container);
+        PowerMock.verifyAll();
+    }
+
+    @Test
+    public void testRecreateContainerImageNotPullable()
+    {
+        containerRepository.recreateContainer(EasyMock.anyObject(Container.class));
+        PowerMock.expectLastCall();
+
+        PowerMock.replayAll();
+        Container container = new Container();
+        container.setImageId("34692387fhea");
         containerService.recreateContainer(container);
         PowerMock.verifyAll();
     }
@@ -210,6 +224,17 @@ public class DefaultContainerServiceTest
 
         PowerMock.replayAll();
         Assert.assertEquals(1, containerService.getAllContainers().size());
+        PowerMock.verifyAll();
+    }
+
+    @Test
+    public void testGetContainerStateStats()
+    {
+        containerRepository.getContainerStateStats();
+        PowerMock.expectLastCall().andReturn(Collections.singletonMap(ContainerState.CREATED, Integer.valueOf(5)));
+
+        PowerMock.replayAll();
+        Assert.assertEquals(1, containerService.getContainerStateStats().size());
         PowerMock.verifyAll();
     }
 }

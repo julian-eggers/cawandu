@@ -1,9 +1,11 @@
 package com.itelg.docker.cawandu.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
+import com.itelg.docker.cawandu.domain.container.ContainerState;
 
 public interface ContainerRepository
 {
@@ -28,4 +30,6 @@ public interface ContainerRepository
     List<Container> getContainersByFilter(ContainerFilter filter);
 
     List<Container> getAllContainers();
+
+    Map<ContainerState, Integer> getContainerStateStats();
 }
