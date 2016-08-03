@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE zk>
 <zk>
-Dashboard
+  <hbox>
+    <window apply="${dashboardContainerStateStatisticComposer}" title="Container" border="normal">
+      <listbox id="containerStateStatisticListbox" sizedByContent="true" span="true">
+        <listhead sizable="true">
+          <listheader label="State" />
+          <listheader label="Count" align="right" />
+        </listhead>
+        <listfoot>
+          <listfooter span="2" id="overallContainerCountListfooter" align="right" />
+        </listfoot>
+      </listbox>
+    </window>
+  </hbox>
 </zk>

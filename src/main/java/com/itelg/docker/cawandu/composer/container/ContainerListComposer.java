@@ -29,7 +29,9 @@ import com.itelg.docker.cawandu.composer.zk.events.ImagePulledEvent;
 import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
 import com.itelg.docker.cawandu.domain.container.ContainerState;
+import com.itelg.docker.cawandu.domain.image.UpdateState;
 import com.itelg.docker.cawandu.service.ContainerService;
+import com.itelg.docker.cawandu.service.ImageService;
 import com.itelg.zkoss.helper.combobox.ComboboxHelper;
 import com.itelg.zkoss.helper.i18n.Labels;
 import com.itelg.zkoss.helper.listbox.ListboxHelper;
@@ -43,6 +45,7 @@ public class ContainerListComposer extends TabComposer
 {
     private static final long serialVersionUID = 1714597547432917497L;
     private transient @Autowired ContainerService containerService;
+    private transient @Autowired ImageService imageService;
 
     private @Wire Listbox containerListbox;
     private @Wire Combobox stateCombobox;
@@ -214,6 +217,33 @@ public class ContainerListComposer extends TabComposer
                         showNotification("Tag swiched");
                     }
                 });
+            });
+
+            Menuitem pullImageContainerMenuitem = new Menuitem("Pull image");
+            pullImageContainerMenuitem.setParent(popup);
+            pullImageContainerMenuitem.setIconSclass("z-icon-download");
+            pullImageContainerMenuitem.setDisabled(!container.isImagePullable());
+            pullImageContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
+            {
+                UpdateState state = imageService.pullImage(container.getImageName());
+
+                if (state == UpdateState.PULLED)
+                {
+                    showNotification("New version pulled");
+                    refreshListbox();
+                }
+                else if (state == UpdateState.NO_UPDATE)
+                {
+                    showNotification("No update available");
+                }
+                else if (state == UpdateState.NO_ACCESS)
+                {
+                    showWarning("No access to private repository!");
+                }
+                else
+                {
+                    showWarning("Unknown error");
+                }
             });
 
             Menuitem recreateContainerMenuitem = new Menuitem("Recreate container");

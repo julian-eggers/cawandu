@@ -1,23 +1,24 @@
 package com.itelg.docker.cawandu.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itelg.docker.cawandu.domain.container.Container;
 import com.itelg.docker.cawandu.domain.container.ContainerFilter;
+import com.itelg.docker.cawandu.domain.container.ContainerState;
 import com.itelg.docker.cawandu.repository.ContainerRepository;
 import com.itelg.docker.cawandu.service.ContainerService;
 import com.itelg.docker.cawandu.service.ImageService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class DefaultContainerService implements ContainerService
 {
-    private static final Logger log = LoggerFactory.getLogger(DefaultContainerService.class);
-
     @Autowired
     private ContainerRepository containerRepository;
 
@@ -34,7 +35,11 @@ public class DefaultContainerService implements ContainerService
     @Override
     public void recreateContainer(Container container)
     {
-        imageService.pullImage(container.getImageName());
+        if (container.isImagePullable())
+        {
+            imageService.pullImage(container.getImageName());
+        }
+
         containerRepository.recreateContainer(container);
         log.info("Container recreated (" + container + ")");
     }
@@ -111,5 +116,11 @@ public class DefaultContainerService implements ContainerService
     public List<Container> getAllContainers()
     {
         return containerRepository.getAllContainers();
+    }
+
+    @Override
+    public Map<ContainerState, Integer> getContainerStateStats()
+    {
+        return containerRepository.getContainerStateStats();
     }
 }

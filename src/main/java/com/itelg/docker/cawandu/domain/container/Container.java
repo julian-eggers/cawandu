@@ -35,6 +35,11 @@ public class Container
         return imageName;
     }
 
+    public boolean isImagePullable()
+    {
+        return StringUtils.isNotBlank(getImageName());
+    }
+
     public String getImageTag()
     {
         if (StringUtils.isNotBlank(getImageName()))
