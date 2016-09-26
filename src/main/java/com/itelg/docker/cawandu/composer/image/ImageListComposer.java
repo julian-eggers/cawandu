@@ -86,7 +86,7 @@ public class ImageListComposer extends TabComposer
             filterProperties.add("ID: " + filter.getId());
         }
 
-        if (filterProperties.isEmpty() == false)
+        if (!filterProperties.isEmpty())
         {
             title += " (" + StringUtils.join(filterProperties, ", ") + ")";
         }

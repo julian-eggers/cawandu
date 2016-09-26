@@ -51,7 +51,7 @@ public class MenuComposer extends AbstractComposer<Menubar>
     }
 
     @Processing(TabCreatedEvent.class)
-    private void onCreateTab(TabCreatedEvent tabCreatedEvent)
+    public void onCreateTab(TabCreatedEvent tabCreatedEvent)
     {
         Tab menuTab = new Tab(tabCreatedEvent.getWindow().getTitle());
         menuTab.setId(tabCreatedEvent.getTabId() + "_Tab");

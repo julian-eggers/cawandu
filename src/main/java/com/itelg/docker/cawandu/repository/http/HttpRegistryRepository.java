@@ -117,14 +117,14 @@ public class HttpRegistryRepository implements RegistryRepository
     @Override
     public List<String> getImageTagsByName(String imageName)
     {
-        imageName = (imageName.contains("/") ? imageName : "library/" + imageName);
-        String url = registryIndexUrl + imageName + "/tags/list";
+        String fixedImageName = (imageName.contains("/") ? imageName : "library/" + imageName);
+        String url = registryIndexUrl + fixedImageName + "/tags/list";
         HttpEntity entity = null;
 
         try
         {
             HttpGet request = new HttpGet(url);
-            request.addHeader("Authorization", "Bearer " + getToken(imageName));
+            request.addHeader("Authorization", "Bearer " + getToken(fixedImageName));
             HttpResponse response = httpClient.execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName("UTF-8"));

@@ -115,7 +115,7 @@ public class ContainerListComposer extends TabComposer
             filterProperties.add("Image-Name: " + filter.getImageName());
         }
 
-        if (filterProperties.isEmpty() == false)
+        if (!filterProperties.isEmpty())
         {
             title += " (" + StringUtils.join(filterProperties, ", ") + ")";
         }
