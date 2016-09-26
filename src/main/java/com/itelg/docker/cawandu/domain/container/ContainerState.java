@@ -6,7 +6,8 @@ public enum ContainerState
     UP("#00CC00"),
     PAUSED("orange"),
     EXITED("#FFFFFF"),
-    RESTARTING("#FF0000");
+    RESTARTING("#FF0000"),
+    REMOVAL_IN_PROGRESS("#FF0000");
 
     private String color;
 
@@ -34,13 +35,17 @@ public enum ContainerState
         {
             return EXITED;
         }
-        else if (value.equals("Created"))
+        else if ("Created".equals(value))
         {
             return CREATED;
         }
         else if (value.startsWith("Restarting"))
         {
             return RESTARTING;
+        }
+        else if ("Removal In Progress".equals(value))
+        {
+            return ContainerState.REMOVAL_IN_PROGRESS;
         }
 
         throw new RuntimeException("Unknown state (" + value + ")");

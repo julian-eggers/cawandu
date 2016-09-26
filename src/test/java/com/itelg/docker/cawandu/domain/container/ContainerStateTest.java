@@ -36,6 +36,12 @@ public class ContainerStateTest
     }
 
     @Test
+    public void testFromStringRemovalInProgress()
+    {
+        Assert.assertEquals(ContainerState.REMOVAL_IN_PROGRESS, ContainerState.fromString("Removal In Progress"));
+    }
+
+    @Test
     public void testFromStringPaused()
     {
         Assert.assertEquals(ContainerState.PAUSED, ContainerState.fromString("Up 21 hours (Paused)"));
