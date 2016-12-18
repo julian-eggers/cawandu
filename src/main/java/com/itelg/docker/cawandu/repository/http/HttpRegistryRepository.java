@@ -114,6 +114,40 @@ public class HttpRegistryRepository implements RegistryRepository
         return null;
     }
 
+    // prepared for later use
+    @SuppressWarnings("unused")
+    private void getTagManifest(String imageName, String tag)
+    {
+        String fixedImageName = (imageName.contains("/") ? imageName : "library/" + imageName);
+        String url = registryIndexUrl + fixedImageName + "/manifests/" + tag;
+        HttpEntity entity = null;
+        System.out.println(url);
+
+        try
+        {
+            HttpGet request = new HttpGet(url);
+            request.addHeader("Authorization", "Bearer " + getToken(fixedImageName));
+            HttpResponse response = httpClient.execute(request);
+            entity = response.getEntity();
+            String content = EntityUtils.toString(entity, Charset.forName("UTF-8"));
+            System.out.println(content);
+        }
+        catch (ConnectException | SocketTimeoutException | ConnectTimeoutException | UnknownHostException e)
+        {
+            log.warn("Request-error: " + url + " -- " + e.getMessage());
+        }
+        catch (Exception e)
+        {
+            log.error(e.getMessage(), e);
+        }
+        finally
+        {
+            connectionManager.closeIdleConnections(MAX_CONNECTION_IDLE_TIME, TimeUnit.SECONDS);
+            connectionManager.closeExpiredConnections();
+            EntityUtils.consumeQuietly(entity);
+        }
+    }
+
     @Override
     public List<String> getImageTagsByName(String imageName)
     {

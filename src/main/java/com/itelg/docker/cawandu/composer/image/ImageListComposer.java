@@ -37,12 +37,21 @@ import com.itelg.zkoss.helper.listbox.ListcellHelper;
 public class ImageListComposer extends TabComposer
 {
     private static final long serialVersionUID = -5360705760494227016L;
-    private transient @Autowired ImageService imageService;
 
-    private @Wire Listbox imageListbox;
-    private @Wire Textbox nameTextbox;
-    private @Wire Textbox idTextbox;
-    private @WireArg("filter") ImageFilter filter;
+    @Autowired
+    private transient ImageService imageService;
+
+    @Wire
+    private Listbox imageListbox;
+
+    @Wire
+    private Textbox nameTextbox;
+
+    @Wire
+    private Textbox idTextbox;
+
+    @WireArg("filter")
+    private ImageFilter filter;
 
     @Override
     protected void afterCompose()
@@ -166,7 +175,7 @@ public class ImageListComposer extends TabComposer
         }
     }
 
-    @Listen("onClick = #searchSubmitButton")
+    @Listen("onClick = #searchSubmitButton; onOK = #nameTextbox,#idTextbox")
     public void onExecuteFilter()
     {
         filter.setName(nameTextbox.getValue().trim());
