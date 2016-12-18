@@ -44,15 +44,30 @@ import de.jaggl.utils.events.zk.annotations.Processing;
 public class ContainerListComposer extends TabComposer
 {
     private static final long serialVersionUID = 1714597547432917497L;
-    private transient @Autowired ContainerService containerService;
-    private transient @Autowired ImageService imageService;
 
-    private @Wire Listbox containerListbox;
-    private @Wire Combobox stateCombobox;
-    private @Wire Textbox nameTextbox;
-    private @Wire Textbox idTextbox;
-    private @Wire Textbox imageNameTextbox;
-    private @WireArg("filter") ContainerFilter filter;
+    @Autowired
+    private transient ContainerService containerService;
+
+    @Autowired
+    private transient ImageService imageService;
+
+    @Wire
+    private Listbox containerListbox;
+
+    @Wire
+    private Combobox stateCombobox;
+
+    @Wire
+    private Textbox nameTextbox;
+
+    @Wire
+    private Textbox idTextbox;
+
+    @Wire
+    private Textbox imageNameTextbox;
+
+    @WireArg("filter")
+    private ContainerFilter filter;
 
     @Override
     protected void afterCompose()
@@ -304,7 +319,7 @@ public class ContainerListComposer extends TabComposer
         }
     }
 
-    @Listen("onClick = #searchSubmitButton")
+    @Listen("onClick = #searchSubmitButton; onSelect = #stateCombobox; onOK = #nameTextbox,#idTextbox,#imageNameTextbox")
     public void onExecuteFilter()
     {
         filter.setState(stateCombobox.getSelectedItem().getValue());

@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.23-RELEASE</version>
+  <version>0.2.24-RELEASE</version>
 
   <properties>
     <!-- System -->
@@ -20,14 +20,14 @@
     <powermock.version>1.6.4</powermock.version>
     <easymock.version>3.4</easymock.version>
     <!-- UI -->
-    <zk.version>8.0.1.1</zk.version>
+    <zk.version>8.0.2.2</zk.version>
     <zkspring.version>3.2.0</zkspring.version>
   </properties>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.4.0.RELEASE</version>
+    <version>1.4.2.RELEASE</version>
   </parent>
 
   <scm>
@@ -96,7 +96,7 @@
       <plugin>
         <groupId>com.spotify</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.4.10</version>
+        <version>0.4.13</version>
         <configuration>
           <serverId>dockerhub-jeggers</serverId>
           <imageName>jeggers/${project.artifactId}</imageName>
@@ -256,7 +256,7 @@
     <dependency>
       <groupId>com.spotify</groupId>
       <artifactId>docker-client</artifactId>
-      <version>5.0.2</version>
+      <version>6.1.1</version>
     </dependency>
     <dependency>
       <groupId>org.json</groupId>
