@@ -6,7 +6,7 @@
   <name>cawandu</name>
   <description></description>
   <url>https://github.com/julian-eggers/cawandu</url>
-  <version>0.2.25-RELEASE</version>
+  <version>0.3.0-RELEASE</version>
 
   <properties>
     <!-- System -->
@@ -17,7 +17,7 @@
     <!-- Testing -->
     <cobertura.version>2.7</cobertura.version>
     <coveralls.version>4.1.0</coveralls.version>
-    <powermock.version>1.6.4</powermock.version>
+    <powermock.version>1.6.6</powermock.version>
     <easymock.version>3.4</easymock.version>
     <!-- UI -->
     <zk.version>8.0.2.2</zk.version>
@@ -27,7 +27,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.4.4.RELEASE</version>
+    <version>1.5.1.RELEASE</version>
   </parent>
 
   <repositories>
@@ -153,7 +153,7 @@
     <dependency>
       <groupId>com.spotify</groupId>
       <artifactId>docker-client</artifactId>
-      <version>6.1.1</version>
+      <version>7.0.2</version>
     </dependency>
     <dependency>
       <groupId>org.json</groupId>
@@ -170,8 +170,8 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  
-    <scm>
+
+  <scm>
     <url>https://github.com/julian-eggers/cawandu</url>
     <connection>scm:git:https://github.com/julian-eggers/cawandu.git</connection>
     <developerConnection>scm:git:https://github.com/julian-eggers/cawandu.git</developerConnection>
@@ -213,6 +213,10 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+      </plugin>
       <!-- TEST AND COVERAGE -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -244,10 +248,10 @@
           <forceTags>true</forceTags>
           <imageTags>
             <imageTag>${project.version}</imageTag>
-            <imageTag>0.2</imageTag>
+            <imageTag>0.3</imageTag>
             <imageTag>latest</imageTag>
           </imageTags>
-          <baseImage>jeanblanchard/java:serverjre-8</baseImage>
+          <baseImage>openjdk:8-jre-alpine</baseImage>
           <volumes>
             <volume>/var/log/apps</volume>
           </volumes>

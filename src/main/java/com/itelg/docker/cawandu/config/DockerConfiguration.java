@@ -17,7 +17,7 @@ import com.spotify.docker.client.DockerCertificates;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.exceptions.DockerCertificateException;
 import com.spotify.docker.client.exceptions.DockerException;
-import com.spotify.docker.client.messages.AuthConfig;
+import com.spotify.docker.client.messages.RegistryAuth;
 
 @Configuration
 public class DockerConfiguration
@@ -46,7 +46,7 @@ public class DockerConfiguration
     public DockerClient dockerClient() throws DockerCertificateException
     {
         DefaultDockerClient.Builder dockerClientBuilder = getDockerClientBuilder();
-        dockerClientBuilder.authConfig(getAuthConfig());
+        dockerClientBuilder.registryAuth(getAuthConfig());
         DockerClient dockerClient = dockerClientBuilder.build();
         return dockerClient;
     }
@@ -70,11 +70,11 @@ public class DockerConfiguration
         }
     }
 
-    private AuthConfig getAuthConfig()
+    private RegistryAuth getAuthConfig()
     {
         if (isNotBlank(dockerRegistryUsername) && isNotBlank(dockerRegistryEmail) && isNotBlank(dockerRegistryPassword))
         {
-            AuthConfig.Builder authConfigBuilder = AuthConfig.builder();
+            RegistryAuth.Builder authConfigBuilder = RegistryAuth.builder();
             authConfigBuilder.username(dockerRegistryUsername);
             authConfigBuilder.email(dockerRegistryEmail);
             authConfigBuilder.password(dockerRegistryPassword);

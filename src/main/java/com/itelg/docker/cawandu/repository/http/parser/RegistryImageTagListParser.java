@@ -5,15 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegistryImageTagListParser implements Converter<String, List<String>>
+public class RegistryImageTagListParser extends AbstractJsonConverter<List<String>>
 {
     @Override
-    public List<String> convert(String json)
+    public List<String> convertJson(String json) throws JSONException
     {
         JSONObject jsonObject = new JSONObject(json);
         JSONArray jsonArray = jsonObject.getJSONArray("tags");
