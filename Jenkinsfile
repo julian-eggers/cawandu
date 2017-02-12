@@ -7,7 +7,7 @@ node
   
   stage('Compile')
   {
-    sh 'mvn clean compile'
+    sh 'mvn clean package -Dmaven.test.skip=true'
   }
   
   stage('Unit-Tests')
