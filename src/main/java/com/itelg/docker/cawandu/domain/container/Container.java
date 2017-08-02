@@ -37,7 +37,7 @@ public class Container
 
     public boolean isImagePullable()
     {
-        return StringUtils.isNotBlank(getImageName());
+        return !isSwarmTask() && StringUtils.isNotBlank(getImageName());
     }
 
     public String getImageTag()
@@ -95,38 +95,44 @@ public class Container
         labels.put(key, value);
     }
 
+    public boolean isSwarmTask()
+    {
+        String imageName = getImageName();
+        return imageName != null ? imageName.contains("@") : false;
+    }
+
     public boolean isStartable()
     {
-        return (state == ContainerState.CREATED || state == ContainerState.EXITED);
+        return !isSwarmTask() && (state == ContainerState.CREATED || state == ContainerState.EXITED);
     }
 
     public boolean isStoppable()
     {
-        return (state == ContainerState.UP || state == ContainerState.RESTARTING);
+        return !isSwarmTask() && (state == ContainerState.UP || state == ContainerState.RESTARTING);
     }
 
     public boolean isRestartable()
     {
-        return (state == ContainerState.UP);
+        return !isSwarmTask() && (state == ContainerState.UP);
     }
 
     public boolean isRemovable()
     {
-        return (state == ContainerState.CREATED || state == ContainerState.EXITED);
+        return !isSwarmTask() && (state == ContainerState.CREATED || state == ContainerState.EXITED);
     }
 
     public boolean isKillable()
     {
-        return true;
+        return !isSwarmTask();
     }
 
     public boolean hasUpdate()
     {
-        return (update && getImageName() != null);
+        return !isSwarmTask() && update && getImageName() != null;
     }
 
     public boolean isTagSwitchable()
     {
-        return (getImageName() != null);
+        return !isSwarmTask() && getImageName() != null;
     }
 }
