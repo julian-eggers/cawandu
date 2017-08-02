@@ -25,7 +25,10 @@ public class ImagePullTask
 
         for (Image image : imageService.getUsedImages())
         {
-            imageService.pullImage(image);
+            if (!image.getName().contains("@"))
+            {
+                imageService.pullImage(image);
+            }
         }
 
         log.info("ImagePullTask finished");

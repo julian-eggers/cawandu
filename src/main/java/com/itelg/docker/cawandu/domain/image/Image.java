@@ -16,6 +16,6 @@ public class Image
 
     public boolean isPullable()
     {
-        return (name != null);
+        return name != null && !name.contains("@");
     }
 }

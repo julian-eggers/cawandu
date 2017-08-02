@@ -264,6 +264,7 @@ public class ContainerListComposer extends TabComposer
             Menuitem recreateContainerMenuitem = new Menuitem("Recreate container");
             recreateContainerMenuitem.setParent(popup);
             recreateContainerMenuitem.setIconSclass("z-icon-repeat");
+            recreateContainerMenuitem.setDisabled(container.isSwarmTask());
             recreateContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 containerService.recreateContainer(container);
@@ -276,6 +277,7 @@ public class ContainerListComposer extends TabComposer
             Menuitem renameContainerMenuitem = new Menuitem("Rename container");
             renameContainerMenuitem.setParent(popup);
             renameContainerMenuitem.setIconSclass("z-icon-edit");
+            renameContainerMenuitem.setDisabled(container.isSwarmTask());
             renameContainerMenuitem.addEventListener(Events.ON_CLICK, event ->
             {
                 org.zkoss.zk.ui.Component composer = ContainerRenameComposer.show(container);
