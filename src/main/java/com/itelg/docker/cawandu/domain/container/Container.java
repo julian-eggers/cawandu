@@ -97,8 +97,12 @@ public class Container
 
     public boolean isSwarmTask()
     {
-        String imageName = getImageName();
-        return imageName != null ? imageName.contains("@") : false;
+        if (labels != null)
+        {
+            return labels.keySet().stream().anyMatch(label -> label.contains("com.docker.swarm"));
+        }
+
+        return false;
     }
 
     public boolean isStartable()
@@ -118,7 +122,7 @@ public class Container
 
     public boolean isRemovable()
     {
-        return !isSwarmTask() && (state == ContainerState.CREATED || state == ContainerState.EXITED);
+        return (state == ContainerState.CREATED || state == ContainerState.EXITED);
     }
 
     public boolean isKillable()
