@@ -110,14 +110,17 @@ public class DefaultImageService implements ImageService
         {
             for (Container container : allContainers)
             {
-                if (image.getName() != null && StringUtils.equals(image.getName(), container.getImageName()))
+                if (!container.isSwarmTask())
                 {
-                    usedImages.add(image);
-                }
-                else if (container.getImageName() != null && image.getId().equals(container.getImageId()))
-                {
-                    image.setName(container.getImageName());
-                    usedImages.add(image);
+                    if (image.getName() != null && StringUtils.equals(image.getName(), container.getImageName()))
+                    {
+                        usedImages.add(image);
+                    }
+                    else if (container.getImageName() != null && image.getId().equals(container.getImageId()))
+                    {
+                        image.setName(container.getImageName());
+                        usedImages.add(image);
+                    }
                 }
             }
         }
